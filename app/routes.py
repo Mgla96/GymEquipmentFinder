@@ -2,7 +2,7 @@
 
 from flask import render_template
 from app import app
-import pandas as pd
+#import pandas as pd
 import numpy as np
 from random import randint
 from time import sleep
@@ -12,12 +12,22 @@ from bs4 import BeautifulSoup
 
 @app.route('/')
 @app.route('/index')
+
 def index():
+    class Product:
+        def __init__(self,name,price,link,availability):
+            self.name = name
+            self.price = price
+            self.link = link
+            self.availability = availability
+            self.image = ""
+    plates,barbells = [],[]
+
+    '''
     #Rogue Mens 20kg Barbells
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
     html_soup = BeautifulSoup(response.text, 'html.parser')
     posts = html_soup.find_all('li',class_='item') 
-
     for post in posts:
         search_header = post.find('div', class_='product-details')
         productName = search_header.find('h2',class_='product-name').text
@@ -100,12 +110,16 @@ def index():
         print("Price:",price)
         print(stock,"\n")
         print("-----------------")
+    '''
 
+    barbells.append("hello")
+    barbells.append("test")
 
-
-
-
-
-
-    user={'username':'Bill'}
+    plates.append("testplate")
+    plates.append("testplate2")
+    user={
+        'username':'Bill',
+        'barbells':barbells,
+        'plates':plates
+    }
     return render_template('index.html',title='Home',user=user)

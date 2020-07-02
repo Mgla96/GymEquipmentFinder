@@ -21,20 +21,21 @@
         <a class="navbar-brand" href="index.html">
             Weights To Lift
             <img src="/app/static/images/caveman.svg" width="50" height="auto" alt="">
-           
         </a>
        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon">
+          </span>
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+        <!--
+          <ul class="navbar-nav">
             <li class="nav-item active">
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item dropdown">
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,29 +46,15 @@
               </div>
             </li>
           </ul>
+          -->
         </div>
       </nav>
 
       <div class="header header-photo page-caption">
-        <h1 class="page-title">The Easy Way To Find Weights To Lift</h1>
-        <p class="lead page-title">Save time and effort finding home gym supplies so you can stay
+        <h1 class="page-title" style="font-size: 3rem">The Easy Way To Find Weights To Lift</h1>
+        <p class="lead page-title" style="font-size: 1.5rem">Save time and effort finding home gym supplies so you can stay
             healthy while sheltering in place.</p>
       </div>
-      <!--
-        <div class="header-photo main" id="home">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="page-caption">
-                            <h1 class="page-title">The Easy Way To Find Weights To Lift</h1>
-                            <h4 class="lead page-title">Save time and effort finding home gym supplies so you can stay
-                                healthy while sheltering in place. </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
     <p id="p1" style="display:none">liftaweight.com</p>
     <div class="container mt-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -80,20 +67,38 @@
             </div>
         </div>
     
-        <div>
-           <p>This page might take a little while to load as it has a lot of data to scrape through</p>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
+            <h4 class="">Barbells</h4>
+            <ol>
+            <div class="content row">
+                {%for bar in user.barbells%}
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-3">
+                    {{bar}}
+                </div>
+                {%endfor%}
+                
+            </div>
+            </ol>
         </div>
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 mt-3">
-            <h4>Barbells</h4>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
+            <h4 class="">Plates</h4>
+            <ol>
+                <div class="content row">
+                    {%for plate in user.plates%}
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-3">
+                        {{plate}}
+                    </div>
+                    {%endfor%}
+                    
+                </div>
+            </ol>
+        
         </div>
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
-            <h4>Plates</h4>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
+            <h4 class="">Power Rack</h4>
         </div>
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
-            <h4>Power Rack</h4>
-        </div>
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
-            <h4>Dumbbells</h4>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
+            <h4 class="">Dumbbells</h4>
         </div>
 
 
@@ -102,26 +107,21 @@
         </main>
     </div>
 
-
-    <!--
-        <div class="container">
-            <h1>Weights To Lift</h1>
-            <h2>Find Available Home Gym Supplies</h2>
-            <p>{{user.username}}</p>
-        </div>
-        -->
-    <div class="container-fluid end border">
+    <div class="container-fluid border footer" id="about">
         <div class="row">
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                 <p>Attributions</p>
                 Caveman Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                Other Stuff To Say
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                <p>About Me</p>
+                <p>I recently graduated college in June of 2020 with a B.S. in Computer Science. This was a project I created for myself to find exercise equipment while learning a new programming framework and decided to share it with others. I hope you find this useful and stay safe! </p>
             </div>
+            <!--
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                 More Stuff To Say
             </div>
+            -->
         </div>
     </div>
 
@@ -142,3 +142,10 @@
 
 </body>
 </html>
+    <!--
+        <div class="container">
+            <h1>Weights To Lift</h1>
+            <h2>Find Available Home Gym Supplies</h2>
+            <p>{{user.username}}</p>
+        </div>
+    -->
