@@ -1,102 +1,143 @@
+from bs4 import BeautifulSoup
 from time import sleep
 import re
 from requests import get 
 import numpy as np
 from random import randint
 
-    #Rogue Mens 20kg Barbells
-    response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
-    html_soup = BeautifulSoup(response.text, 'html.parser')
-    posts = html_soup.find_all('li',class_='item') 
-    for post in posts:
-        search_header = post.find('div', class_='product-details')
-        productName = search_header.find('h2',class_='product-name').text
-        productLink = search_header.find('a').get('href')
-        productPrice = search_header.find('span',class_='price').text
-        ownPage = get(productLink)
-        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-        page_container = html_soup2.find('div',class_='main-container')
-        avail = page_container.find('div',class_='bin-stock-availability')
+from . import db
+
+
+#Rogue Mens 20kg Barbells
+response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
+html_soup = BeautifulSoup(response.text, 'html.parser')
+posts = html_soup.find_all('li',class_='item') 
+for post in posts:
+    search_header = post.find('div', class_='product-details')
+    productName = search_header.find('h2',class_='product-name').text
+    productLink = search_header.find('a').get('href')
+    productPrice = search_header.find('span',class_='price').text
+    ownPage = get(productLink)
+    html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+    page_container = html_soup2.find('div',class_='main-container')
+    avail = page_container.find('div',class_='bin-stock-availability')
+    inStock=True
+    if avail.find('div',class_='bin-signup-dropper'):
+        inStock=False
+    else:
         inStock=True
-        if avail.find('div',class_='bin-signup-dropper'):
-            inStock=False
-        else:
-            inStock=True
-        print(productName)
-        print(productLink)
-        print("Price:",productPrice)
-        print("In Stock?: ",inStock,"\n")
-    #Rogue Plates
-    response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers')
-    html_soup = BeautifulSoup(response.text, 'html.parser')
-    plates = html_soup.find_all('li',class_='item')
+    cmd = 
+    "INSERT INTO Bars (name, link, price, image, stock) " 
+    +
+    "VALUES (productName, productLink, productPrice, "", inStock) "
+    + 
+    "ON CONFLICT (id) DO UPDATE "
+    +
+    "SET stock = excluded.stock, "
+    +
+    "price = excluded.price)"
+    db.execute(cmd)
+    #print(productName)
+    #print(productLink)
+    #print("Price:",productPrice)
+    #print("In Stock?: ",inStock,"\n")
 
-    for plate in plates:
-        search_header = plate.find('div', class_='product-details')
-        productName = search_header.find('h2',class_='product-name').text
-        productLink = search_header.find('a').get('href')     
-        productPrice = search_header.find('span',class_='price').text
-        ownPage = get(productLink)
-        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-        page_container = html_soup2.find('div',class_='main-container')
-        avail = page_container.find('div',class_='bin-stock-availability')
+#Rogue Plates
+response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers')
+html_soup = BeautifulSoup(response.text, 'html.parser')
+plates = html_soup.find_all('li',class_='item')
+
+for plate in plates:
+    search_header = plate.find('div', class_='product-details')
+    productName = search_header.find('h2',class_='product-name').text
+    productLink = search_header.find('a').get('href')     
+    productPrice = search_header.find('span',class_='price').text
+    ownPage = get(productLink)
+    html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+    page_container = html_soup2.find('div',class_='main-container')
+    avail = page_container.find('div',class_='bin-stock-availability')
+    inStock=True
+    if avail.find('div',class_='bin-signup-dropper'):
+        inStock=False
+    else:
         inStock=True
-        if avail.find('div',class_='bin-signup-dropper'):
-            inStock=False
-        else:
-            inStock=True
-
-        print(productName)
-        print(productLink)
-        print("Price:",productPrice)
-        print("In Stock?: ",inStock)
+    cmd = 
+    "INSERT INTO Plates (name, link, price, image, stock) " 
+    +
+    "VALUES (productName, productLink, productPrice, "", inStock) "
+    + 
+    "ON CONFLICT (id) DO UPDATE "
+    +
+    "SET stock = excluded.stock, "
+    +
+    "price = excluded.price)"
+    db.execute(cmd)
+    #print(productName)
+    #print(productLink)
+    #print("Price:",productPrice)
+    #print("In Stock?: ",inStock)
     
-    #REP Men's 20KG Barbell
-    response = get('https://www.repfitness.com/bars-plates/olympic-bars')
-    html_soup = BeautifulSoup(response.text, 'html.parser')
-    bars = html_soup.find_all('li',class_='item')
+#REP Men's 20KG Barbell
+response = get('https://www.repfitness.com/bars-plates/olympic-bars')
+html_soup = BeautifulSoup(response.text, 'html.parser')
+bars = html_soup.find_all('li',class_='item')
+for bar in bars:
+    prodInfo = bar.find('h2', class_='product-name')
+    pricecont = bar.find('div', class_='price-container')
+    productName = prodInfo.text
+    productLink = prodInfo.find('a').get('href')
+    productPrice = pricecont.find('span',class_='price').text
+    ownPage = get(productLink)
+    html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+    info = html_soup2.find('p',class_='availability')
+    inStock = info.find('span').text
 
-    for bar in bars:
-        prodInfo = bar.find('h2', class_='product-name')
-        pricecont = bar.find('div', class_='price-container')
-        name = prodInfo.text
-        link = prodInfo.find('a').get('href')
-        price = pricecont.find('span',class_='price').text
-        ownPage = get(link)
-        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-        info = html_soup2.find('p',class_='availability')
-        stock = info.find('span').text
-        print(name)
-        print(link)
-        print("Price:",price)
-        print(stock,"\n")
+    cmd = 
+    "INSERT INTO Bars (name, link, price, image, stock) " 
+    +
+    "VALUES (productName, productLink, productPrice, "", inStock) "
+    + 
+    "ON CONFLICT (id) DO UPDATE "
+    +
+    "SET stock = excluded.stock, "
+    +
+    "price = excluded.price)"
+    db.execute(cmd)
+    #print(productName)
+    #print(productLink)
+    #print("Price:",productPrice)
+    #print(inStock,"\n")
     
-    #REP Plates
-    response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
-    html_soup = BeautifulSoup(response.text, 'html.parser')
-    plates = html_soup.find_all('li',class_='item') #<li class="result-row">
-    for plate in plates:
-        prodInfo = plate.find('h2', class_='product-name')
-        pricecont = plate.find('div', class_='price-container')
-        name = prodInfo.text
-        link = prodInfo.find('a').get('href')
-        price = pricecont.find('span',class_='price').text
-        ownPage = get(link)
-        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-        info = html_soup2.find('p',class_='availability')
-        stock = info.find('span').text
-        print(name[:-2])
-        print(link)
-        print("Price:",price)
-        print(stock,"\n")
-        print("-----------------")
-    barbells.append("hello")
-    barbells.append("test")
-    plates.append("testplate")
-    plates.append("testplate2")
-    user={
-        'username':'Bill',
-        'barbells':barbells,
-        'plates':plates
-    }
-  
+#REP Plates
+response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
+html_soup = BeautifulSoup(response.text, 'html.parser')
+plates = html_soup.find_all('li',class_='item') #<li class="result-row">
+for plate in plates:
+    prodInfo = plate.find('h2', class_='product-name')
+    pricecont = plate.find('div', class_='price-container')
+    productName = prodInfo.text[:-2]
+    productLink = prodInfo.find('a').get('href')
+    productPrice = pricecont.find('span',class_='price').text
+    ownPage = get(productLink)
+    html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+    info = html_soup2.find('p',class_='availability')
+    inStock = info.find('span').text
+
+    cmd = 
+    "INSERT INTO Plates (name, link, price, image, stock) " 
+    +
+    "VALUES (productName, productLink, productPrice, "", inStock) "
+    + 
+    "ON CONFLICT (id) DO UPDATE "
+    +
+    "SET stock = excluded.stock, "
+    +
+    "price = excluded.price)"
+    db.execute(cmd)
+
+    #print(productName[:-2])
+    #print(productLink)
+    #print("Price:",productPrice)
+    #print(inStock,"\n")
+
+    #https://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql/1109198#1109198

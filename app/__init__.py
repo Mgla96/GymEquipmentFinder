@@ -3,10 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+db = SQLAlchemy(app)
+#db.init_app(app)
+
 from app import routes
 
-#db = SQLAlchemy()
-#db.init_app(app)
+
 """
 def create_app():
     app = Flask(__name__, instance_relative_config=False)

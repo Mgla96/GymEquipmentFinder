@@ -1,4 +1,6 @@
-#from . import db
+from . import db
+from sqlalchemy.dialects.postgresql import JSON
+
 
 class Bars(db.Model):
     __tablename__ = 'Bars'
@@ -33,11 +35,12 @@ class Bars(db.Model):
         unique=False,
         nullable=False
     )
+    __table_args__ = {'extend_existing': True}
     def __repr__(self):
         return '<Bars {}>'.format(self.name)
 
 class Plates(db.Model):
-    __tablename__ = 'Bars'
+    __tablename__ = 'Plates'
     name = db.Column(
         db.String(64),
         index=False,
@@ -69,6 +72,7 @@ class Plates(db.Model):
         unique=False,
         nullable=False
     )
+    __table_args__ = {'extend_existing': True}
     def __repr__(self):
         return '<Plates {}>'.format(self.name)
 
