@@ -94,11 +94,9 @@
   background-size: cover;
 }
 
-
-
 html,
 body{
-    font-family: Arial;
+    /*font-family: Arial;*/
     font-size: 1.1rem;
     font-weight: 400;
     line-height: 1.15;

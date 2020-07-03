@@ -1,13 +1,5 @@
-#python3 -m flask run
-
 from flask import render_template
-
 from app import app
-import numpy as np
-from random import randint
-from time import sleep
-import re
-from requests import get 
 from bs4 import BeautifulSoup
 
 #from .models import db, Bars, Plates
@@ -28,3 +20,6 @@ def index():
     }
     #return render_template('index.html',title='Home',user=user,barbells=Barbells.query.all,plates=Plates.query.all)
     return render_template('index.html',title='Home',user=user)
+
+
+#python3 -m flask run

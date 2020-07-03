@@ -1,3 +1,8 @@
+from time import sleep
+import re
+from requests import get 
+import numpy as np
+from random import randint
 
     #Rogue Mens 20kg Barbells
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
