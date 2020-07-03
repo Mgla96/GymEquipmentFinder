@@ -1,6 +1,7 @@
 #python3 -m flask run
 
 from flask import render_template
+
 from app import app
 #import pandas as pd
 import numpy as np
@@ -10,9 +11,10 @@ import re
 from requests import get 
 from bs4 import BeautifulSoup
 
+from .models import db, Bars, Plates
+
 @app.route('/')
 @app.route('/index')
-
 def index():
     class Product:
         def __init__(self,name,price,link,availability):
@@ -111,10 +113,9 @@ def index():
         print(stock,"\n")
         print("-----------------")
     '''
-
+    '''
     barbells.append("hello")
     barbells.append("test")
-
     plates.append("testplate")
     plates.append("testplate2")
     user={
@@ -122,4 +123,10 @@ def index():
         'barbells':barbells,
         'plates':plates
     }
-    return render_template('index.html',title='Home',user=user)
+    '''
+    user={
+        'username':'Bill'
+    }
+
+    return render_template('index.html',title='Home',user=user,barbells=Barbells.query.all,plates=Plates.query.all)
+    

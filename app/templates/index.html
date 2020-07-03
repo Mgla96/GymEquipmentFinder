@@ -18,22 +18,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="#">
             Weights To Lift
-            <img src="/app/static/images/caveman.svg" width="50" height="auto" alt="">
+            <img src="/static/images/caveman.svg" width="50" height="auto" alt="">
         </a>
-       
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon">
-          </span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!--
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">About</a>
             </li>
@@ -46,7 +37,7 @@
               </div>
             </li>
           </ul>
-          -->
+          
         </div>
       </nav>
 
@@ -69,42 +60,63 @@
     
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
             <h4 class="">Barbells</h4>
-            <ol>
+          
             <div class="content row">
-                {%for bar in user.barbells%}
+                {%for bar in barbells%}
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-3">
-                    {{bar}}
+                    <span class="field-name">Name: </span>
+                    <span class="field-value">{{bar.name}}</span>
+                    <span class="field-name">Price: </span>
+                    <span class="field-value">{{bar.price}}</span>
+                    <span class="field-value">{{bar.image}}</span>
+                    <span class="field-name">Link: </span>
+                    <span class="field-value">{{bar.link}}</span>
+                    <span class="field-name">Available?: </span>
+                    <span class="field-value">{{bar.stock}}</span>
                 </div>
                 {%endfor%}
                 
             </div>
-            </ol>
+    
+        </div>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
+            <p>Advertisement</p>
         </div>
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
             <h4 class="">Plates</h4>
-            <ol>
+     
                 <div class="content row">
-                    {%for plate in user.plates%}
+                    {%for plate in plates%}
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-3">
-                        {{plate}}
+                        <span class="field-name">Name: </span>
+                        <span class="field-value">{{plate.name}}</span>
+                        <span class="field-name">Price: </span>
+                        <span class="field-value">{{plate.price}}</span>
+                        <span class="field-value">{{plate.image}}</span>
+                        <span class="field-name">Link: </span>
+                        <span class="field-value">{{plate.link}}</span>
+                        <span class="field-name">Available?: </span>
+                        <span class="field-value">{{plate.stock}}</span>
                     </div>
                     {%endfor%}
-                    
                 </div>
-            </ol>
-        
+      
+        </div>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
+            <p>Advertisement</p>
         </div>
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
             <h4 class="">Power Rack</h4>
         </div>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
+            <p>Advertisement</p>
+        </div>
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
             <h4 class="">Dumbbells</h4>
         </div>
-
-
-        <canvas class="background"></canvas>
-
-        </main>
+        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
+            <p>Advertisement</p>
+        </div>
     </div>
 
     <div class="container-fluid border footer" id="about">
