@@ -1,1 +1,1 @@
-web: gunicorn hello:weighttolift --preload
+web: gunicorn weighttolift:app --preload
