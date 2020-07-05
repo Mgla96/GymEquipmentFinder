@@ -7,21 +7,11 @@ from .models import db, Bars, Plates
 def index():
     #plates,barbells = [],[]
     user={
-        'username':'Bill'
-    }
-
- 
-    user={
         'username':'Bill',
-        'barbells':barbells,
-        'plates':plates
+        'bars':Bars.query.all,
+        'plates':Plates.query.all
     }
-
-
-
-
-    return render_template('index.html',title='Home',user=user,bars=Bars.query.all,plates=Plates.query.all)
-    #return render_template('index.html',title='Home',user=user)
+    return render_template('index.html',title='Home',user=user)
 
 
 #python3 -m flask run
