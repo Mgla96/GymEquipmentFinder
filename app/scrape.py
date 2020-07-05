@@ -37,10 +37,6 @@ for post in posts:
     +
     "price = excluded.price)"
     db.execute(cmd)
-    #print(productName)
-    #print(productLink)
-    #print("Price:",productPrice)
-    #print("In Stock?: ",inStock,"\n")
 
 #Rogue Plates
 response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers')
@@ -72,10 +68,6 @@ for plate in plates:
     +
     "price = excluded.price)"
     db.execute(cmd)
-    #print(productName)
-    #print(productLink)
-    #print("Price:",productPrice)
-    #print("In Stock?: ",inStock)
     
 #REP Men's 20KG Barbell
 response = get('https://www.repfitness.com/bars-plates/olympic-bars')
@@ -103,10 +95,6 @@ for bar in bars:
     +
     "price = excluded.price)"
     db.execute(cmd)
-    #print(productName)
-    #print(productLink)
-    #print("Price:",productPrice)
-    #print(inStock,"\n")
     
 #REP Plates
 response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
@@ -135,9 +123,3 @@ for plate in plates:
     "price = excluded.price)"
     db.execute(cmd)
 
-    #print(productName[:-2])
-    #print(productLink)
-    #print("Price:",productPrice)
-    #print(inStock,"\n")
-
-    #https://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql/1109198#1109198
