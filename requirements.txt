@@ -1,3 +1,4 @@
+alembic==1.4.2
 appdirs==1.4.3
 apturl==0.5.2
 bcrypt==3.1.7
@@ -22,6 +23,7 @@ entrypoints==0.3
 fasteners==0.14.1
 filelock==3.0.12
 Flask==1.1.2
+Flask-Migrate==2.5.3
 Flask-SQLAlchemy==2.4.3
 future==0.18.2
 gunicorn==20.0.4
@@ -66,6 +68,7 @@ python-apt==2.0.0
 python-dateutil==2.7.3
 python-debian===0.1.36ubuntu1
 python-dotenv==0.14.0
+python-editor==1.0.4
 pytz==2019.3
 pyxattr==0.6.1
 pyxdg==0.26

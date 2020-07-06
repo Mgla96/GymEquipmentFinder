@@ -36,6 +36,7 @@ for post in posts:
     +
     "price = excluded.price)"
     db.execute(cmd)
+    db.commit()
 
 
 #Rogue Plates
@@ -68,8 +69,9 @@ for plate in plates:
     +
     "price = excluded.price)"
     db.execute(cmd)
+    db.commit()
   
-  
+
 #REP Men's 20KG Barbell
 response = get('https://www.repfitness.com/bars-plates/olympic-bars')
 html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -96,6 +98,7 @@ for bar in bars:
     +
     "price = excluded.price)"
     db.execute(cmd)
+    db.commit()
     
 #REP Plates
 response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
@@ -123,4 +126,5 @@ for plate in plates:
     +
     "price = excluded.price)"
     db.execute(cmd)
+    db.commit()
 
