@@ -5,7 +5,7 @@ from requests import get
 import numpy as np
 from random import randint
 
-from .models import db
+from . import db
 
 #Rogue Mens 20kg Barbells
 

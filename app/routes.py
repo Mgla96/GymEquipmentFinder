@@ -33,9 +33,12 @@ def scrpe2():
             inStock=False
         else:
             inStock=True
-        cmd = "INSERT INTO Bars (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
-        db.execute(cmd)
-        db.commit()
+        #cmd = "INSERT INTO Bars (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
+        #db.add(cmd)
+        #db.commit()
+        tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        db.session.add(tmp)
+        db.session.commit()
 
 
     #Rogue Plates
@@ -57,9 +60,12 @@ def scrpe2():
             inStock=False
         else:
             inStock=True
-        cmd = "INSERT INTO Plates (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
-        db.execute(cmd)
-        db.commit()
+        #cmd = "INSERT INTO Plates (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
+        #db.add(cmd)
+        #db.commit()
+        tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        db.session.add(tmp)
+        db.session.commit()
   
 
     #REP Men's 20KG Barbell
@@ -77,9 +83,12 @@ def scrpe2():
         info = html_soup2.find('p',class_='availability')
         inStock = info.find('span').text
 
-        cmd = "INSERT INTO Bars (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
-        db.execute(cmd)
-        db.commit()
+        #cmd = "INSERT INTO Bars (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
+        #db.add(cmd)
+        #db.commit()
+        tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        db.session.add(tmp)
+        db.session.commit()
     
     #REP Plates
     response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
@@ -95,12 +104,16 @@ def scrpe2():
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
         inStock = info.find('span').text
-        cmd = "INSERT INTO Plates (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
-        db.execute(cmd)
-        db.commit()
+        #cmd = "INSERT INTO Plates (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
+        #db.add(cmd)
+        #db.commit()
+        tmp = Plates(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        db.session.add(tmp)
+        db.session.commit()
 
 
 def index():
+    db.create_all()
     #plates,barbells = [],[]
     #print("QUERY::::",Bars.query.all)
     scrpe2()
@@ -144,10 +157,5 @@ scratch
                         <span class="field-value">{{plate.stock}}</span>
                     </div>
                     {%endfor%}
-
-
-
-
-
 
 """
