@@ -18,7 +18,7 @@ class Bars(db.Model):
         nullable=False
     )
     price = db.Column(
-        db.Integer,
+        db.String(80),
         index=False,
         unique=False,
         nullable=False
@@ -55,7 +55,7 @@ class Plates(db.Model):
         nullable=False
     )
     price = db.Column(
-        db.Integer,
+        db.String(80),
         index=False,
         unique=False,
         nullable=False
