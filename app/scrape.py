@@ -4,8 +4,8 @@ import re
 from requests import get 
 import numpy as np
 from random import randint
-from . import db
 
+from .models import db
 
 #Rogue Mens 20kg Barbells
 
@@ -94,5 +94,4 @@ def scrpe():
         db.execute(cmd)
         db.commit()
 
-if __name__ == "__main__"
-    scrpe()
+scrpe()
