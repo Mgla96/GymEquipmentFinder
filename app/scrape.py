@@ -4,7 +4,6 @@ import re
 from requests import get 
 import numpy as np
 from random import randint
-
 from . import db
 
 
@@ -38,6 +37,7 @@ for post in posts:
     "price = excluded.price)"
     db.execute(cmd)
 
+
 #Rogue Plates
 response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers')
 html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -68,7 +68,8 @@ for plate in plates:
     +
     "price = excluded.price)"
     db.execute(cmd)
-    
+  
+  
 #REP Men's 20KG Barbell
 response = get('https://www.repfitness.com/bars-plates/olympic-bars')
 html_soup = BeautifulSoup(response.text, 'html.parser')
