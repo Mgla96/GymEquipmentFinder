@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql import JSON
 class Bars(db.Model):
     __tablename__ = 'Bars'
     name = db.Column(
-        db.String(64),
+        db.String(65),
         index=False,
         unique=True,
         nullable=False,
@@ -18,7 +18,7 @@ class Bars(db.Model):
         nullable=False
     )
     price = db.Column(
-        db.String(80),
+        db.String(12),
         index=False,
         unique=False,
         nullable=False
@@ -42,7 +42,7 @@ class Bars(db.Model):
 class Plates(db.Model):
     __tablename__ = 'Plates'
     name = db.Column(
-        db.String(64),
+        db.String(65),
         index=False,
         unique=True,
         nullable=False,
@@ -55,7 +55,7 @@ class Plates(db.Model):
         nullable=False
     )
     price = db.Column(
-        db.String(80),
+        db.String(12),
         index=False,
         unique=False,
         nullable=False

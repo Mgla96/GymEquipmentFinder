@@ -6,7 +6,6 @@ import numpy as np
 from random import randint
 
 from . import db
-
 def scrpe():
     #Rogue Mens 20kg Barbells
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
@@ -16,7 +15,7 @@ def scrpe():
         search_header = post.find('div', class_='product-details')
         productName = search_header.find('h2',class_='product-name').text
         productLink = search_header.find('a').get('href')
-        productPrice = search_header.find('span',class_='price').text
+        productPrice = search_header.find('span',class_='price').text[1::]
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         page_container = html_soup2.find('div',class_='main-container')
@@ -26,13 +25,9 @@ def scrpe():
             inStock=False
         else:
             inStock=True
-        #cmd = "INSERT INTO Bars (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
-        #db.add(cmd)
-        #db.commit()
         tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
         db.session.add(tmp)
         db.session.commit()
-
 
     #Rogue Plates
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers')
@@ -43,7 +38,7 @@ def scrpe():
         search_header = plate.find('div', class_='product-details')
         productName = search_header.find('h2',class_='product-name').text
         productLink = search_header.find('a').get('href')     
-        productPrice = search_header.find('span',class_='price').text
+        productPrice = search_header.find('span',class_='price').text[1::]
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         page_container = html_soup2.find('div',class_='main-container')
@@ -53,9 +48,6 @@ def scrpe():
             inStock=False
         else:
             inStock=True
-        #cmd = "INSERT INTO Plates (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
-        #db.add(cmd)
-        #db.commit()
         tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
         db.session.add(tmp)
         db.session.commit()
@@ -70,18 +62,13 @@ def scrpe():
         pricecont = bar.find('div', class_='price-container')
         productName = prodInfo.text
         productLink = prodInfo.find('a').get('href')
-        productPrice = pricecont.find('span',class_='price').text
+        productPrice = pricecont.find('span',class_='price').text[1::]
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
         inStock = info.find('span').text
-
-        #cmd = "INSERT INTO Bars (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
-        #db.add(cmd)
-        #db.commit()
         tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
-        db.session.add(tmp)
-        db.session.commit()
+        db.sessio    scrpe2()
     
     #REP Plates
     response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
@@ -92,17 +79,13 @@ def scrpe():
         pricecont = plate.find('div', class_='price-container')
         productName = prodInfo.text[:-2]
         productLink = prodInfo.find('a').get('href')
-        productPrice = pricecont.find('span',class_='price').text
+        productPrice = pricecont.find('span',class_='price').text[1::]
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
         inStock = info.find('span').text
-        #cmd = "INSERT INTO Plates (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
-        #db.add(cmd)
-        #db.commit()
         tmp = Plates(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
         db.session.add(tmp)
         db.session.commit()
-    
 
 scrpe()
