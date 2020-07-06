@@ -6,7 +6,7 @@ from .models import db, Bars, Plates
 @app.route('/index')
 def index():
     #plates,barbells = [],[]
-    print("QUERY::::",Bars.query.all)
+    #print("QUERY::::",Bars.query.all)
     user={
         'username':'Bill',
         'bars':Bars.query.all,
