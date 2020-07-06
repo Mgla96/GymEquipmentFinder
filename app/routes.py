@@ -116,7 +116,7 @@ def index():
     db.create_all()
     #plates,barbells = [],[]
     #print("QUERY::::",Bars.query.all)
-    scrpe2()
+    #scrpe2()
     user={
         'username':'Bill'
     }
