@@ -25,16 +25,7 @@ for post in posts:
         inStock=False
     else:
         inStock=True
-    cmd = 
-    "INSERT INTO Bars (name, link, price, image, stock) " 
-    +
-    "VALUES (productName, productLink, productPrice, "", inStock) "
-    + 
-    "ON CONFLICT (id) DO UPDATE "
-    +
-    "SET stock = excluded.stock, "
-    +
-    "price = excluded.price)"
+    cmd = "INSERT INTO Bars (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
     db.execute(cmd)
     db.commit()
 
@@ -58,16 +49,7 @@ for plate in plates:
         inStock=False
     else:
         inStock=True
-    cmd = 
-    "INSERT INTO Plates (name, link, price, image, stock) " 
-    +
-    "VALUES (productName, productLink, productPrice, "", inStock) "
-    + 
-    "ON CONFLICT (id) DO UPDATE "
-    +
-    "SET stock = excluded.stock, "
-    +
-    "price = excluded.price)"
+    cmd = "INSERT INTO Plates (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
     db.execute(cmd)
     db.commit()
   
@@ -87,16 +69,7 @@ for bar in bars:
     info = html_soup2.find('p',class_='availability')
     inStock = info.find('span').text
 
-    cmd = 
-    "INSERT INTO Bars (name, link, price, image, stock) " 
-    +
-    "VALUES (productName, productLink, productPrice, "", inStock) "
-    + 
-    "ON CONFLICT (id) DO UPDATE "
-    +
-    "SET stock = excluded.stock, "
-    +
-    "price = excluded.price)"
+    cmd = "INSERT INTO Bars (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
     db.execute(cmd)
     db.commit()
     
@@ -114,17 +87,7 @@ for plate in plates:
     html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
     info = html_soup2.find('p',class_='availability')
     inStock = info.find('span').text
-
-    cmd = 
-    "INSERT INTO Plates (name, link, price, image, stock) " 
-    +
-    "VALUES (productName, productLink, productPrice, "", inStock) "
-    + 
-    "ON CONFLICT (id) DO UPDATE "
-    +
-    "SET stock = excluded.stock, "
-    +
-    "price = excluded.price)"
+    cmd = "INSERT INTO Plates (name, link, price, image, stock) "+"VALUES (productName, productLink, productPrice, "", inStock) "+ "ON CONFLICT (id) DO UPDATE "+"SET stock = excluded.stock, "+"price = excluded.price)"
     db.execute(cmd)
     db.commit()
 
