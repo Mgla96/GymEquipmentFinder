@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       
         <a class="navbar-brand" href="#">
-            Weights To Lift
+            Weights In Stock
             <img src="/static/images/caveman.svg" width="50" height="auto" alt="">
         </a>
     
@@ -56,19 +56,23 @@
     
        
             <h4 class="">Barbells</h4>
+            <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
             <div class="content row">
                 {%for bar in bars%}
+                    {% if bar.stock == True%}
                 <div class="col-auto mb-3">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{bar.name}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{bar.price}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{bar.brand}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">${{bar.price}}</h6>
                             <p class="card-text">{{bar.image}}</p>
                             <p class="card-text">In Stock: {{bar.stock}}</p>
                             <a href="#" class="card-link">{{bar.link}}</a>
                         </div>
                     </div>
                 </div>
+                    {%endif%}
                 {%endfor%}
             </div>
                 
@@ -79,20 +83,23 @@
         </div>
         
             <h4 class="">Plates</h4>
-
+                <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
                 <div class="content row">
                     {%for plate in plates%}
+                    {% if plate.stock == True%}
                     <div class="col-auto mb-3">
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">{{plate.name}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{plate.price}}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">{{plate.brand}}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">${{plate.price}}</h6>
                                 <p class="card-text">{{plate.image}}</p>
                                 <p class="card-text">In Stock: {{plate.stock}}</p>
                                 <a href="#" class="card-link">{{plate.link}}</a>
                             </div>
                         </div>
                     </div>
+                    {%endif%}
                     {%endfor%}
                 </div>
       
