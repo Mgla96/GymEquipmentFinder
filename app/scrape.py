@@ -6,7 +6,7 @@ from random import randint
 from .models import db, Bars, Plates
 from bs4 import BeautifulSoup
 def retry():
-    wait = randint(0,4)
+    wait = randint(0,2)
     sleep(wait)
 
 def scrpe():
@@ -15,7 +15,6 @@ def scrpe():
     html_soup = BeautifulSoup(response.text, 'html.parser')
     posts = html_soup.find_all('li',class_='item') 
     for post in posts:
-        retry()
         search_header = post.find('div', class_='product-details')
         productName = search_header.find('h2',class_='product-name').text[:100]
         productLink = search_header.find('a').get('href')
@@ -43,7 +42,6 @@ def scrpe():
     html_soup = BeautifulSoup(response.text, 'html.parser')
     plates = html_soup.find_all('li',class_='item')
     for plate in plates:
-        retry()
         search_header = plate.find('div', class_='product-details')
         productName = search_header.find('h2',class_='product-name').text[:100]
         productLink = search_header.find('a').get('href')     
@@ -72,7 +70,6 @@ def scrpe():
     html_soup = BeautifulSoup(response.text, 'html.parser')
     bars = html_soup.find_all('li',class_='item')
     for bar in bars:
-        retry()
         prodInfo = bar.find('h2', class_='product-name')
         pricecont = bar.find('div', class_='price-container')
         productName = prodInfo.text[:100]
@@ -101,7 +98,6 @@ def scrpe():
     html_soup = BeautifulSoup(response.text, 'html.parser')
     plates = html_soup.find_all('li',class_='item') #<li class="result-row">
     for plate in plates:
-        retry()
         prodInfo = plate.find('h2', class_='product-name')
         pricecont = plate.find('div', class_='price-container')
         productName = prodInfo.text[:-2]
