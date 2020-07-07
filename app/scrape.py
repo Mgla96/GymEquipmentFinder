@@ -1,13 +1,10 @@
-from bs4 import BeautifulSoup
 from time import sleep
 import re
 from requests import get 
 import numpy as np
 from random import randint
 from .models import db, Bars, Plates
-from sqlalchemy import update
-from sqlalchemy.sql.expression import select, exists
-
+from bs4 import BeautifulSoup
 def retry():
     wait = randint(0,4)
     sleep(wait)
