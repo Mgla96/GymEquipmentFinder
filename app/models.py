@@ -18,7 +18,7 @@ class Bars(db.Model):
         nullable=False
     )
     link = db.Column(
-        db.String(80),
+        db.String(160),
         index=True,
         unique=True,
         nullable=False
@@ -61,7 +61,7 @@ class Plates(db.Model):
         nullable=False
     )
     link = db.Column(
-        db.String(80),
+        db.String(160),
         index=True,
         unique=True,
         nullable=False
