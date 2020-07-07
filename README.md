@@ -13,8 +13,6 @@ python3 -m flask run
 source venv/bin/activate
 '''
 
-
-
 # Establish psql session with your remote database
 '''bash
 heroku pg:psql -a findweights
@@ -41,7 +39,7 @@ scratch
                     <span class="field-name">Available?: </span>
                     <span class="field-value">{{bar.stock}}</span>
                 </div>
-                {%endfor%}
+    {%endfor%}
 
 
 

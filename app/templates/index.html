@@ -54,54 +54,49 @@
             </div>
         </div>
     
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
+       
             <h4 class="">Barbells</h4>
             <div class="content row">
                 {%for bar in bars%}
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-3">
-                    <span class="field-name">Name: </span>
-                    <span class="field-value">{{bar.name}}</span>
-                    <span class="field-name">Price: </span>
-                    <span class="field-value">{{bar.price}}</span>
-                    <span class="field-value">{{bar.image}}</span>
-                    <span class="field-name">Link: </span>
-                    <span class="field-value">{{bar.link}}</span>
-                    <span class="field-name">Available?: </span>
-                    <span class="field-value">{{bar.stock}}</span>
+                <div class="col-auto mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{bar.name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{bar.price}}</h6>
+                            <p class="card-text">{{bar.image}}</p>
+                            <p class="card-text">In Stock: {{bar.stock}}</p>
+                            <a href="#" class="card-link">{{bar.link}}</a>
+                        </div>
+                    </div>
                 </div>
                 {%endfor%}
-                {{bars}}
-                {{bars[0]}}
             </div>
                 
                 
-            
-        </div>
+
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
             <p>Advertisement</p>
         </div>
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
+        
             <h4 class="">Plates</h4>
 
                 <div class="content row">
                     {%for plate in plates%}
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-3">
-                        <span class="field-name">Name: </span>
-                        <span class="field-value">{{plate.name}}</span>
-                        <span class="field-name">Price: </span>
-                        <span class="field-value">{{plate.price}}</span>
-                        <span class="field-value">{{plate.image}}</span>
-                        <span class="field-name">Link: </span>
-                        <span class="field-value">{{plate.link}}</span>
-                        <span class="field-name">Available?: </span>
-                        <span class="field-value">{{plate.stock}}</span>
+                    <div class="col-auto mb-3">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{plate.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{plate.price}}</h6>
+                                <p class="card-text">{{plate.image}}</p>
+                                <p class="card-text">In Stock: {{plate.stock}}</p>
+                                <a href="#" class="card-link">{{plate.link}}</a>
+                            </div>
+                        </div>
                     </div>
                     {%endfor%}
-                    {{plates}}
-                    {{plates[0]}}
                 </div>
       
-        </div>
+       
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
             <p>Advertisement</p>
         </div>

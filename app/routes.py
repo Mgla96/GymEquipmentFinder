@@ -1,6 +1,7 @@
 from flask import render_template
 from app import app
 from .models import db, Bars, Plates
+
 @app.route('/')
 @app.route('/index')
 def index():

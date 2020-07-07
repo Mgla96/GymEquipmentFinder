@@ -14,7 +14,7 @@ class Bars(db.Model):
     brand = db.Column(
         db.String(80),
         index=True,
-        unique=True,
+        unique=False,
         nullable=False
     )
     link = db.Column(
@@ -57,7 +57,7 @@ class Plates(db.Model):
     brand = db.Column(
         db.String(80),
         index=True,
-        unique=True,
+        unique=False,
         nullable=False
     )
     link = db.Column(
