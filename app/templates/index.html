@@ -1,6 +1,16 @@
 <html lang="en">
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171808141-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-171808141-1');
+    </script>
+    <script data-ad-client="ca-pub-2182088840518298" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <meta charset="UTF-8">
     <title>Home Page | Weight Finder </title>
     <link rel="stylesheet" href="../static/css/main.css">
@@ -9,39 +19,41 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      
+
         <a class="navbar-brand" href="#">
             Weights In Stock
             <img src="/static/images/caveman.svg" width="50" height="auto" alt="">
         </a>
-    
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
-          <ul class="navbar-nav">
+        <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item dropdown">
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
             </li>
-          </ul>
-          
-        </div>
-      </nav>
+        </ul>
 
-      <div class="header header-photo page-caption">
+        </div>
+    </nav>
+
+    <div class="header header-photo page-caption">
         <h1 class="page-title" style="font-size: 3rem">The Easy Way To Find Weights To Lift</h1>
-        <p class="lead page-title" style="font-size: 1.5rem">Save time and effort finding home gym supplies so you can stay
+        <p class="lead page-title" style="font-size: 1.5rem">Save time and effort finding home gym supplies so you can
+            stay
             healthy while sheltering in place.</p>
-      </div>
+    </div>
     <p id="p1" style="display:none">liftaweight.com</p>
     <div class="container mt-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -53,105 +65,90 @@
                 </div>
             </div>
         </div>
-    
-       
-            <h4 class="">Barbells</h4>
-            <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
-            <div class="content row">
-                {%for bar in bars%}
-                    {% if bar.stock == True%}
-                <div class="col-auto mb-3">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{bar.name}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{bar.brand}}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">${{bar.price}}</h6>
-                            <p class="card-text">{{bar.image}}</p>
-                            <p class="card-text">In Stock: {{bar.stock}}</p>
-                            <a href="#" class="card-link">{{bar.link}}</a>
-                        </div>
-                    </div>
-                </div>
-                    {%endif%}
-                {%endfor%}
-            </div>
-                
-                
 
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
-            <p>Advertisement</p>
-        </div>
-        
-            <h4 class="">Plates</h4>
-                <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
-                <div class="content row">
-                    {%for plate in plates%}
-                    {% if plate.stock == True%}
-                    <div class="col-auto mb-3">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{plate.name}}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{plate.brand}}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">${{plate.price}}</h6>
-                                <p class="card-text">{{plate.image}}</p>
-                                <p class="card-text">In Stock: {{plate.stock}}</p>
-                                <a href="#" class="card-link">{{plate.link}}</a>
-                            </div>
-                        </div>
+
+        <h4 class="">Barbells</h4>
+        <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
+        <div class="content row">
+            {%for bar in bars%}
+            {% if bar.stock == True%}
+            <div class="col-auto mb-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{bar.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{bar.brand}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">${{bar.price}}</h6>
+                        <p class="card-text">{{bar.image}}</p>
+                        <p class="card-text">In Stock: {{bar.stock}}</p>
+                        <a href="#" class="card-link">{{bar.link}}</a>
                     </div>
-                    {%endif%}
-                    {%endfor%}
                 </div>
-      
-       
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
-            <p>Advertisement</p>
+            </div>
+            {%endif%}
+            {%endfor%}
+        </div>
+        <h4 class="">Plates</h4>
+        <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
+        <div class="content row">
+            {%for plate in plates%}
+            {% if plate.stock == True%}
+            <div class="col-auto mb-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{plate.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{plate.brand}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">${{plate.price}}</h6>
+                        <p class="card-text">{{plate.image}}</p>
+                        <p class="card-text">In Stock: {{plate.stock}}</p>
+                        <a href="#" class="card-link">{{plate.link}}</a>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            {%endfor%}
         </div>
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
             <h4 class="">Power Rack</h4>
             <p>Coming Soon</p>
         </div>
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
-            <p>Advertisement</p>
-        </div>
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
             <h4 class="">Dumbbells</h4>
             <p>Coming Soon</p>
-        </div>
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3 mt-3">
-            <p>Advertisement</p>
         </div>
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
             <h4 class="">Craigslist Deals</h4>
             <p>Coming Soon</p>
         </div>
     </div>
-
     <div class="container-fluid border footer" id="about">
         <div class="row">
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                 <p>Attributions</p>
-                Caveman Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+                Caveman Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from
+                <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
             </div>
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
                 <p>About Me</p>
-                <p>I recently graduated college in June of 2020 with a B.S. in Computer Science. This was a project I created for myself to find exercise equipment while learning a new programming framework and decided to share it with others. I hope you find this useful and stay safe! </p>
+                <p>I recently graduated college in June of 2020 with a B.S. in Computer Science. This was a project I
+                    created for myself to find exercise equipment while learning a new programming framework and decided
+                    to share it with others. I hope you find this useful and stay safe! </p>
             </div>
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
-    function copyToClipboard(element) {
-      var $temp = $("<input>");
-      $("body").append($temp);
-      $temp.val($(element).text()).select();
-      document.execCommand("copy");
-      $temp.remove();
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
 
-      alert("Copied Address to Clipboard! Thanks for Sharing!")
-    }
+            alert("Copied Address to Clipboard! Thanks for Sharing!")
+        }
     </script>
 
 </body>
+
 </html>
