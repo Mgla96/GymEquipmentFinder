@@ -9,13 +9,22 @@ python3 -m flask run
 '''
 
 # Activate Existing Venv
+'''bash
+source venv/bin/activate
+'''
+
 
 
 # Establish psql session with your remote database
 '''bash
-heroku pg:psql
+heroku pg:psql -a findweights
 '''
 
+# Querying Database from terminal
+'''bash
+SELECT * from "Bars"
+SELECT * from "Plates"
+'''
 
 """
 scratch

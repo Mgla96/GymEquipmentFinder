@@ -25,7 +25,7 @@ def scrpe():
             inStock=False
         else:
             inStock=True
-        tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        tmp = Bars(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
         db.session.add(tmp)
         db.session.commit()
 
@@ -48,7 +48,7 @@ def scrpe():
             inStock=False
         else:
             inStock=True
-        tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        tmp = Bars(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
         db.session.add(tmp)
         db.session.commit()
   
@@ -67,7 +67,7 @@ def scrpe():
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
         inStock = info.find('span').text
-        tmp = Bars(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        tmp = Bars(name=productName[:100],brand="REP",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
         db.sessio    scrpe2()
     
     #REP Plates
@@ -84,7 +84,7 @@ def scrpe():
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
         inStock = info.find('span').text
-        tmp = Plates(name=productName,link=productLink,price=productPrice,image="",stock=inStock)
+        tmp = Plates(name=productName[:100],brand="REP",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
         db.session.add(tmp)
         db.session.commit()
 

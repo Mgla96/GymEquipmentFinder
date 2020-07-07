@@ -5,11 +5,17 @@ from sqlalchemy.dialects.postgresql import JSON
 class Bars(db.Model):
     __tablename__ = 'Bars'
     name = db.Column(
-        db.String(65),
+        db.String(100),
         index=False,
         unique=True,
         nullable=False,
         primary_key=True
+    )
+    brand = db.Column(
+        db.String(80),
+        index=True,
+        unique=True,
+        nullable=False
     )
     link = db.Column(
         db.String(80),
@@ -42,11 +48,17 @@ class Bars(db.Model):
 class Plates(db.Model):
     __tablename__ = 'Plates'
     name = db.Column(
-        db.String(65),
+        db.String(100),
         index=False,
         unique=True,
         nullable=False,
         primary_key=True
+    )
+    brand = db.Column(
+        db.String(80),
+        index=True,
+        unique=True,
+        nullable=False
     )
     link = db.Column(
         db.String(80),
