@@ -29,9 +29,9 @@ def scrpe():
         else:
             inStock=True
         if productName:
-            tmp2 = db.session.query(Bars).filter_by(name=productName)
-            if db.session.query(tmp2.exists()):
-                tmp2.update(dict(stock=inStock))
+            tmp2 = db.session.query(Bars).filter_by(name=productName).first()
+            if tmp2:
+                tmp2.stock=inStock
             else:
                 tmp = Bars(name=productName,brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -56,10 +56,9 @@ def scrpe():
         else:
             inStock=True
         if productName:
-            tmp2 = db.session.query(Plates).filter_by(name=productName)
-            #print(tmp2)
-            if db.session.query(tmp2.exists()):
-                tmp2.update(dict(stock=inStock))
+            tmp2 = db.session.query(Plates).filter_by(name=productName).first()
+            if tmp2:
+                tmp2.stock=inStock
             else:
                 tmp = Plates(name=productName,brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -85,9 +84,9 @@ def scrpe():
         else:
             stockbl=True
         if productName:
-            tmp2 = db.session.query(Bars).filter_by(name=productName)
-            if db.session.query(tmp2.exists()):
-                tmp2.update(dict(stock=stockbl))
+            tmp2 = db.session.query(Bars).filter_by(name=productName).first()
+            if tmp2:
+                tmp2.stock=inStock
             else:
                 tmp = Bars(name=productName,brand="REP",link=productLink[:80],price=productPrice[2:12],image="",stock=stockbl)
                 db.session.add(tmp)
@@ -113,12 +112,12 @@ def scrpe():
         else:
             stockbl=True
         if productName:
-            tmp2 = db.session.query(Plates).filter_by(name=productName[:100])
-            if db.session.query(tmp2.exists()):
-                tmp2.update(dict(stock=stockbl))
+            tmp2 = db.session.query(Plates).filter_by(name=productName).first()
+            if tmp2:
+                tmp2.stock=inStock
             else:
-                tmp = Plates(name=productName[:100],brand="REP",link=productLink[:80],price=productPrice[2:12],image="",stock=stockbl)
+                tmp = Plates(name=productName,brand="REP",link=productLink[:80],price=productPrice[2:12],image="",stock=stockbl)
                 db.session.add(tmp)
             db.session.commit()
-
+            
 scrpe()

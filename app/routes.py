@@ -6,7 +6,6 @@ from .models import db, Bars, Plates
 @app.route('/index')
 def index():
     db.create_all()
-
     user={
         'username':'Bill'
     }
