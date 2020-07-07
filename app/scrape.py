@@ -68,7 +68,8 @@ def scrpe():
         info = html_soup2.find('p',class_='availability')
         inStock = info.find('span').text
         tmp = Bars(name=productName[:100],brand="REP",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
-        db.sessio    scrpe2()
+        db.session.add(tmp)
+        db.session.commit()
     
     #REP Plates
     response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
