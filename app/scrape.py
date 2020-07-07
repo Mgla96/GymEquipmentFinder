@@ -7,7 +7,7 @@ from random import randint
 from . import db
 
 def scrpe():
-        #Rogue Mens 20kg Barbells
+    #Rogue Mens 20kg Barbells
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
     html_soup = BeautifulSoup(response.text, 'html.parser')
     posts = html_soup.find_all('li',class_='item') 
@@ -25,8 +25,13 @@ def scrpe():
             inStock=False
         else:
             inStock=True
-        tmp = Bars(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
-        db.session.add(tmp)
+        tmp2 = Bars.query.filter_by(name=productName[:100]).update(dict(stock=inStock))
+        #print(tmp2)
+        if tmp2>0:
+            continue
+        else:
+            tmp = Bars(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
+            db.session.add(tmp)
         db.session.commit()
 
     #Rogue Plates
@@ -48,8 +53,13 @@ def scrpe():
             inStock=False
         else:
             inStock=True
-        tmp = Plates(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
-        db.session.add(tmp)
+        tmp2 = Plates.query.filter_by(name=productName[:100]).update(dict(stock=inStock))
+        #print(tmp2)
+        if tmp2>0:
+            continue
+        else:
+            tmp = Plates(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=inStock)
+            db.session.add(tmp)
         db.session.commit()
   
 
@@ -72,8 +82,13 @@ def scrpe():
             stockbl=False
         else:
             stockbl=True
-        tmp = Bars(name=productName[:100],brand="REP",link=productLink[:80],price=productPrice[:12],image="",stock=stockbl)
-        db.session.add(tmp)
+        tmp2 = Bars.query.filter_by(name=productName[:100]).update(dict(stock=stockbl))
+        #print(tmp2)
+        if tmp2>0:
+            continue
+        else:
+            tmp = Bars(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=stockbl)
+            db.session.add(tmp)
         db.session.commit()
     
     #REP Plates
@@ -95,8 +110,13 @@ def scrpe():
             stockbl=False
         else:
             stockbl=True
-        tmp = Plates(name=productName[:100],brand="REP",link=productLink[:80],price=productPrice[:12],image="",stock=stockbl)
-        db.session.add(tmp)
+        tmp2 = Plates.query.filter_by(name=productName[:100]).update(dict(stock=stockbl))
+        #print(tmp2)
+        if tmp2>0:
+            continue
+        else:
+            tmp = Plates(name=productName[:100],brand="Rogue",link=productLink[:80],price=productPrice[:12],image="",stock=stockbl)
+            db.session.add(tmp)
         db.session.commit()
 
 scrpe()
