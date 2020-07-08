@@ -120,7 +120,7 @@ def scrpe():
         tst = plate.find('div',class_='image-container')
         prd = tst.find('img', class_='tile-image')
         productName = prd.get('title')
-        img = prd.get('src')
+        #img = prd.get('src')
         productLink = 'https://www.titan.fitness/'+tst.find('a',class_='gtm-product-list').get('href')
         prod = plate.find('span',class_='value')
         if prod:
@@ -147,7 +147,7 @@ def scrpe():
         prd = tst.find('img', class_='tile-image')
         productName = prd.get('title')
         productLink = 'https://www.titan.fitness/'+tst.find('a',class_='gtm-product-list').get('href')
-        img = prd.get('src')
+        #img = prd.get('src')
         prod = plate.find('span',class_='value')
         if prod:
             productPrice=prod.get('content')

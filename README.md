@@ -8,6 +8,16 @@ Tool to show weights and gym equipment that are in stock from popular brands
 source venv/bin/activate
 ```
 ex: if you get error no module psycopg2 it's because I forgot to do this
+
+# Installing dependencies in Venv
+```bash
+pip3 install -r requirements.txt
+```
+or if python3 linked to pip
+```bash
+pip install -r requirements.txt
+```
+
 # Running
 ```bash
 python3 -m flask run
