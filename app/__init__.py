@@ -5,7 +5,7 @@ from flask_talisman import Talisman
 from config import Config
 
 app = Flask(__name__)
-Talisman(app)
+#Talisman(app)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 
