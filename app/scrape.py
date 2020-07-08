@@ -53,8 +53,6 @@ def scrpe():
         stockbl=True
         if inStock:
             stockbl=False
-        else:
-            stockbl=True
         if productName:
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
