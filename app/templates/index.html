@@ -60,7 +60,7 @@
         <div class="content row">
             {%for bar in bars%}
             {% if bar.stock == True%}
-            <div class="col-auto mb-3">
+            <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{bar.name}}</h5>
@@ -87,7 +87,7 @@
         <div class="content row">
             {%for plate in plates%}
             {% if plate.stock == True%}
-            <div class="col-auto mb-3">
+            <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{plate.name}}</h5>
