@@ -36,7 +36,7 @@ class Bars(db.Model):
         nullable=True
     )
     stock = db.Column(
-        db.Boolean,
+        db.String(80),
         index=False,
         unique=False,
         nullable=False
@@ -79,7 +79,7 @@ class Plates(db.Model):
         nullable=True
     )
     stock = db.Column(
-        db.Boolean,
+        db.String(80),
         index=False,
         unique=False,
         nullable=False

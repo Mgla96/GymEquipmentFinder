@@ -60,7 +60,7 @@
         <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
         <div class="content row">
             {%for bar in bars%}
-            {% if bar.stock == True%}
+            {% if bar.stock != "Out of Stock" and bar.stock!="Out of stock"%}
             <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -68,7 +68,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{bar.brand}}</h6>
                         <h6 class="card-subtitle mb-2 text-muted">${{bar.price}}</h6>
                         <p class="card-text">{{bar.image}}</p>
-                        <p class="card-text">In Stock: {{bar.stock}}</p>
+                        <p class="card-text">{{bar.stock}}</p>
                         <a href="{{bar.link}}" class="card-link">{{bar.link}}</a>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
         <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
         <div class="content row">
             {%for plate in plates%}
-            {% if plate.stock == True%}
+            {% if plate.stock != "Out of Stock" and plate.stock!="Out of stock"%}
             <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -91,7 +91,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{plate.brand}}</h6>
                         <h6 class="card-subtitle mb-2 text-muted">${{plate.price}}</h6>
                         <p class="card-text">{{plate.image}}</p>
-                        <p class="card-text">In Stock: {{plate.stock}}</p>
+                        <p class="card-text">{{plate.stock}}</p>
                         <a href="{{plate.link}}" class="card-link">{{plate.link}}</a>
                     </div>
                 </div>
