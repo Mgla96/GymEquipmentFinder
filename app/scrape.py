@@ -23,10 +23,11 @@ def scrpe():
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
-        inStock = info.find('span').text
-        stockbl=True
-        if inStock:
-            stockbl=False
+        stockbl = info.find('span').text
+        inStock=True
+        if stockbl:
+            if stockbl=="Out of stock":
+                inStock=False
         if productName:
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
