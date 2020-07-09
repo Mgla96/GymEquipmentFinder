@@ -33,7 +33,7 @@ def scrpe():
             if tmp2:
                 tmp2.stock=stockbl
             else:
-                tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[2:12],image="",stock=stockbl)
+                tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=stockbl)
                 db.session.add(tmp)
             db.session.commit()
     
