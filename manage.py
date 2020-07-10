@@ -42,10 +42,11 @@ def scrpe():
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                db.session.commit()
             else:
                 tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
-            db.session.commit()
+                db.session.commit()
 
     #XMark Plates
     response = get('https://www.xmarkfitness.com/free-weights/weight-plates/?limit=80')
@@ -72,10 +73,11 @@ def scrpe():
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                db.session.commit()
             else:
                 tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
-            db.session.commit()   
+                db.session.commit()   
 
     #REP Men's 20KG Barbell - should be good
     response = get('https://www.repfitness.com/bars-plates/olympic-bars')
@@ -99,10 +101,11 @@ def scrpe():
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=stockbl
+                db.session.commit()
             else:
                 tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=stockbl)
                 db.session.add(tmp)
-            db.session.commit()
+                db.session.commit()
     
     #REP Plates
     response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
@@ -126,10 +129,11 @@ def scrpe():
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=stockbl
+                db.session.commit()
             else:
                 tmp = Plates(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=stockbl)
                 db.session.add(tmp)
-            db.session.commit()
+                db.session.commit()
     
 
     #titan
@@ -166,10 +170,11 @@ def scrpe():
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                db.session.commit()
             else:
                 tmp = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
-            db.session.commit()
+                db.session.commit()
 
     response = get('https://www.titan.fitness/strength/barbells/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -204,10 +209,11 @@ def scrpe():
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                db.session.commit()
             else:
                 tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
-            db.session.commit()
+                db.session.commit()
 @manager.command
 def scrpe2():
     #Fringe Sport Plates
@@ -245,8 +251,7 @@ def scrpe2():
         soldout=omega.find("span",class_="sold_out")
         if soldout:
             if "Sold Out" in soldout.text:
-                #inStock="Out of Stock"
-                inStock="TESTING STUFF"
+                inStock="Out of Stock"
             else:
                 inStock="In Stock"
         else:
@@ -254,15 +259,12 @@ def scrpe2():
         tmp2 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp2:
             tmp2.stock=inStock
-            #db.session.commit()
-            print(tmp2.stock)
+            db.session.commit()
         else:
             tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
-            #db.session.commit()
-        db.session.commit()
+            db.session.commit()
 
-    '''
     #Fringe Sport Barbells
     response = get('https://www.fringesport.com/collections/bumper-plates/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -307,12 +309,10 @@ def scrpe2():
         if tmp2:
             tmp2.stock=inStock
             db.session.commit()
-            print(tmp2.stock)
         else:
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
             db.session.commit()   
-    '''
 #manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
