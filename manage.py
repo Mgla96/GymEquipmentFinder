@@ -245,7 +245,8 @@ def scrpe2():
         soldout=omega.find("span",class_="sold_out")
         if soldout:
             if "Sold Out" in soldout.text:
-                inStock="Out of Stock"
+                #inStock="Out of Stock"
+                inStock="TESTING STUFF"
             else:
                 inStock="In Stock"
         else:
@@ -253,13 +254,15 @@ def scrpe2():
         tmp2 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp2:
             tmp2.stock=inStock
-            db.session.commit()
+            #db.session.commit()
             print(tmp2.stock)
         else:
             tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
-            db.session.commit()
-     
+            #db.session.commit()
+        db.session.commit()
+
+    '''
     #Fringe Sport Barbells
     response = get('https://www.fringesport.com/collections/bumper-plates/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -309,7 +312,7 @@ def scrpe2():
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
             db.session.commit()   
-    
+    '''
 #manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
