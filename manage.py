@@ -11,6 +11,36 @@ from random import randint
 from bs4 import BeautifulSoup
 
 manager = Manager(app)
+def Alt():
+    response=get("https://www.xmarkfitness.com/free-weights/dumbbells/?limit=80")
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    dumbbells = html_soup.find_all('li',class_='Odd') #<li class="result-row">
+    dumbbells2 = html_soup.find_all('li',class_='Even')
+    dumbbells = dumbbells + dumbbells2
+    for dumbbell in dumbbells:
+        a=dumbbell.find("a",class_="pname")
+        productName=a.text
+        productLink=a.get("href")
+        productPrice=dumbbell.find("em",class_="p-price").text
+        outStock=dumbbell.find("a",class_="icon-Out")
+        inStock=dumbbell.find("a",class_="icon-Add")
+        if inStock:
+            inStock="In Stock"
+        elif outStock:
+            inStock=outStock.text
+        else:
+            inStock="Out of stock"
+        if productName:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
+            tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
+            if tmp2:
+                tmp2.stock=inStock   
+            else:
+                tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                db.session.add(tmp)
+            db.session.commit()
+            print("dumbbell")
 def XMark():
     #Barbell ..
     response = get('https://www.xmarkfitness.com/bars/?limit=80')
@@ -101,6 +131,7 @@ def XMark():
                 tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+            print("dumbbell")
 
 def REP():
     #REP Men's 20KG Barbell - should be good
@@ -297,6 +328,8 @@ def Titan():
                 tmp = Dumbbells(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+    #Racks
+    
         
         
 
@@ -407,7 +440,10 @@ def scrpe():
 @manager.command
 def scrpe2():
     Fringe()
-    
+@manager.command
+def alt(): 
+    Alt()
+#for dumbbell
 #manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
