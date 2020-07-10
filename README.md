@@ -36,6 +36,10 @@ SELECT * from "Bars";
 SELECT * from "Plates";
 ```
 
+# Testing Scheduler 
+```bash
+heroku run python app/scrape.py -a findweights
+```
 
        #cmd = "INSERT INTO Plates (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
         #db.add(cmd)

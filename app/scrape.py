@@ -1,15 +1,79 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from config import Config
+
 from time import sleep
 import re
 from requests import get 
-import numpy as np
 from random import randint
-from .models import db, Bars, Plates
 from bs4 import BeautifulSoup
+from models import db, Bars, Plates
 def retry():
     wait = randint(0,2)
     sleep(wait)
 
 def scrpe():
+    #XMark Barbell
+    response = get('https://www.xmarkfitness.com/bars/?limit=80')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    posts = html_soup.find_all('li',class_='Odd') #<li class="result-row">
+    posts2 = html_soup.find_all('li',class_='Even')
+    bars = posts + posts2
+    for bar in bars:
+        a=bar.find("a",class_="pname")
+        productName=a.text
+        productLink=a.get("href")
+        productPrice=bar.find("em",class_="p-price").text
+        outStock=bar.find("a",class_="icon-Out")
+        inStock=bar.find("a",class_="icon-Add")
+        if inStock:
+            inStock="In Stock"
+        elif outStock:
+            inStock=outStock.text
+        else:
+            inStock="Out of stock"
+        if productName:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
+            tmp2 = db.session.query(Bars).filter_by(name=productName).first()
+            if tmp2:
+                tmp2.stock=inStock
+            else:
+                tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                db.session.add(tmp)
+            db.session.commit()
+
+    #XMark Plates
+    response = get('https://www.xmarkfitness.com/free-weights/weight-plates/?limit=80')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    posts = html_soup.find_all('li',class_='Odd') #<li class="result-row">
+    posts2 = html_soup.find_all('li',class_='Even')
+    bars = posts + posts2
+    for bar in bars:
+        a=bar.find("a",class_="pname")
+        productName=a.text
+        productLink=a.get("href")
+        productPrice=bar.find("em",class_="p-price").text
+        outStock=bar.find("a",class_="icon-Out")
+        inStock=bar.find("a",class_="icon-Add")
+        if inStock:
+            inStock="In Stock"
+        elif outStock:
+            inStock=outStock.text
+        else:
+            inStock="Out of stock"
+        if productName:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
+            tmp2 = db.session.query(Plates).filter_by(name=productName).first()
+            if tmp2:
+                tmp2.stock=inStock
+            else:
+                tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                db.session.add(tmp)
+            db.session.commit()   
+
     #REP Men's 20KG Barbell - should be good
     response = get('https://www.repfitness.com/bars-plates/olympic-bars')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -27,6 +91,8 @@ def scrpe():
         if not stockbl:
             stockbl=""
         if productName:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=stockbl
@@ -52,6 +118,8 @@ def scrpe():
         if not stockbl:
             stockbl=""
         if productName:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=stockbl
@@ -77,6 +145,8 @@ def scrpe():
         else:
             productPrice="?"
         if productName and productPrice!="?":
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
             ownPage = get(productLink)
             html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
             page_container = html_soup2.find('span',class_='strong')
@@ -110,10 +180,11 @@ def scrpe():
         prod = bar.find('span',class_='value')
         if prod:
             productPrice=prod.get('content')
-            print(productPrice)
         else:
             productPrice="?"
         if productName and productPrice!="?":
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
             ownPage = get(productLink)
             html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
             page_container = html_soup2.find('span',class_='strong')
@@ -134,56 +205,7 @@ def scrpe():
                 tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
-    
-    #Rogue Mens 20kg Barbells
-    response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
-    html_soup = BeautifulSoup(response.text, 'html.parser')
-    bars = html_soup.find_all('li',class_='item') 
-    for bar in bars:
-        search_header = bar.find('div', class_='product-details')
-        productName = search_header.find('h2',class_='product-name').text[:100]
-        productLink = search_header.find('a').get('href')
-        productPrice = search_header.find('span',class_='price').text[1::]
-        ownPage = get(productLink)
-        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-        page_container = html_soup2.find('div',class_='main-container')
-        avail = page_container.find('div',class_='bin-stock-availability')
-        inStock="In Stock"
-        if avail.find('div',class_='bin-signup-dropper'):
-            inStock="Out of Stock"
-        if productName:
-            tmp2 = db.session.query(Bars).filter_by(name=productName).first()
-            if tmp2:
-                tmp2.stock=inStock
-            else:
-                tmp = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
-            db.session.commit()
 
-    #Rogue Plates
-    response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers')
-    html_soup = BeautifulSoup(response.text, 'html.parser')
-    plates = html_soup.find_all('li',class_='item')
-    for plate in plates:
-        search_header = plate.find('div', class_='product-details')
-        productName = search_header.find('h2',class_='product-name').text[:100]
-        productLink = search_header.find('a').get('href')     
-        productPrice = search_header.find('span',class_='price').text
-        ownPage = get(productLink)
-        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-        page_container = html_soup2.find('div',class_='main-container')
-        avail = page_container.find('div',class_='bin-stock-availability')
-        inStock="In Stock"
-        if avail.find('div',class_='bin-signup-dropper'):
-            inStock="Out of Stock"
-        if productName:
-            tmp2 = db.session.query(Plates).filter_by(name=productName).first()
-            if tmp2:
-                tmp2.stock=inStock
-            else:
-                tmp = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
-            db.session.commit()
 
           
 scrpe()
