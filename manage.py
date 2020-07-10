@@ -208,8 +208,104 @@ def scrpe():
                 tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+@manager.command
+def scrpe2():
+    #Fringe Sport Plates
+    response = get('https://www.fringesport.com/collections/bumper-plates/?size=90')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    plates = html_soup.find_all("div",class_="odd")
+    plates2 = html_soup.find_all("div",class_="even")
+    plates=plates+plates2
 
+    for plate in plates:
+        productName = plate.find("a").title
+        productLink = "https://www.fringesport.com"+plate.find("a").get("href")
+        ownPage = get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        omega = html_soup2.find("div",class_="eight columns omega")
+        productName=omega.find("h1",class_="product_name")
+        if productName:
+            productName=productName.text
+        else:
+            productName=""
+        productPrice=omega.find("span",class_="current_price")
+        if productPrice:
+            productPrice=productPrice.text
+            productPrice=productPrice.replace(" ","")
+            productPrice=productPrice.replace("\n","")
+            if productPrice:
+                if productPrice[0]!="$":
+                    productPrice="None"
+                else:
+                    productPrice=productPrice[1:]
+            else:
+                productPrice="None"
+        else:
+            productPrice="-1"
+        soldout=omega.find("span",class_="sold_out")
+        if soldout:
+            if "Sold Out" in soldout.text:
+                inStock="Sold Out"
+            else:
+                inStock="In Stock"
+        else:
+            inStock="In Stock"
+        tmp2 = db.session.query(Plates).filter_by(name=productName).first()
+        if tmp2:
+            tmp2.stock=inStock
+        else:
+            tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            db.session.add(tmp)
+        db.session.commit()
+     
+    #Fringe Sport Barbells
+    response = get('https://www.fringesport.com/collections/bumper-plates/?size=90')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    bar = html_soup.find_all("div",class_="odd")
+    bar2 = html_soup.find_all("div",class_="even")
+    bars=bar+bar2
 
+    for bar in bars:
+        productName = bar.find("a").title
+        productLink = "https://www.fringesport.com"+bar.find("a").get("href")
+        ownPage = get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        omega = html_soup2.find("div",class_="eight columns omega")
+        productName=omega.find("h1",class_="product_name")
+        if productName:
+            productName=productName.text
+        else:
+            productName=""
+        productPrice=omega.find("span",class_="current_price")
+        if productPrice:
+            productPrice=productPrice.text
+            productPrice=productPrice.replace(" ","")
+            productPrice=productPrice.replace("\n","")
+            if productPrice:
+                if productPrice[0]!="$":
+                    productPrice="None"
+                else:
+                    productPrice=productPrice[1:]
+            else:
+                productPrice="None"
+        else:
+            productPrice="-1"
+        soldout=omega.find("span",class_="sold_out")
+        if soldout:
+            if "Sold Out" in soldout.text:
+                inStock="Sold Out"
+            else:
+                inStock="In Stock"
+        else:
+            inStock="In Stock"
+        tmp2 = db.session.query(Bars).filter_by(name=productName).first()
+        if tmp2:
+            tmp2.stock=inStock
+        else:
+            tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            db.session.add(tmp)
+        db.session.commit()   
+    
 #manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
