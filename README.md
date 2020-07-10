@@ -38,7 +38,12 @@ SELECT * from "Plates";
 
 # Testing Scheduler 
 ```bash
-heroku run python app/scrape.py -a findweights
+heroku run python3 manage.py scrpe -a findweights
+```
+
+# alt
+```bash
+python3 manage.py scrpe  
 ```
 
        #cmd = "INSERT INTO Plates (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
