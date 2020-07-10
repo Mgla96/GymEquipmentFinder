@@ -37,8 +37,12 @@ SELECT * from "Plates";
 ```
 
 # Testing Scheduler 
+Split into two scripts since the scraping takes long
 ```bash
 heroku run python3 manage.py scrpe -a findweights
+```
+```bash
+heroku run python3 manage.py scrpe2 -a findweights
 ```
 
 
