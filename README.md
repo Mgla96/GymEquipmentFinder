@@ -56,6 +56,11 @@ python manage.py scrpe
 python manage.py scrpe2
 ```
 
+# Viewing Scheduler Logs?
+```bash
+heroku logs --ps scheduler -a findweights
+```
+
 
        #cmd = "INSERT INTO Plates (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
         #db.add(cmd)
