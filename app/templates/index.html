@@ -113,9 +113,6 @@
                 </li>
             </ul>
 
-
-
-
         </div>
         <div id="amzn-assoc-ad-97119ad9-0607-4835-b103-d0e41429b10e"></div>
         <script async
@@ -182,12 +179,12 @@
                 {%endfor%}
         </div>
 
-        <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
+        
             <h4 class="">Dumbbells</h4>
             <p>Coming Soon</p>
             <div class="content row">
                 {%for dumbbell in dumbbells%}
-                {% if dumbell.stock != "Out of Stock" and dumbbell.stock!="Out of stock"%}
+                    {% if dumbbell.stock != "Out of Stock" and dumbbell.stock!="Out of stock"%}
                 <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
                     <div class="card" style="font-size:80%; width: 18rem;">
                         <div class="card-body">
@@ -219,7 +216,7 @@
                 Barbell Solid 20-Inch Dumbbell Handle</a><img
                 src="//ir-na.amazon-adsystem.com/e/ir?t=matthewdgottl-20&l=am2&o=1&a=B0010YOBB4" width="1" height="1"
                 border="0" alt="" style="border:none !important; margin:0px !important;" />
-        </div>
+  
 
         <div class="card d-flex justify-content-between flex-wrap flex-md-nowrap pb-2 mb-3">
             <h4 class="">Other Deals</h4>

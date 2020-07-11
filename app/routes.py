@@ -5,10 +5,6 @@ from .models import db, Bars, Plates, Racks, Dumbbells
 from flask_script import Manager
 manager = Manager(app)
 
-@manager.command
-def scrape2():
-    print("hello")
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -16,5 +12,5 @@ def index():
     user={
         'username':'Bill'
     }
-    return render_template('index.html',title='Home',user=user,bars=Bars.query.all(),plates=Plates.query.all(),racks=Racks.query.all(),dumbbells=Dumbbells.query.all())
+    return render_template('index.html',title='Home',user=user,bars=Bars.query.all(),plates=Plates.query.all(),dumbbells=Dumbbells.query.all(),racks=Racks.query.all())
 
