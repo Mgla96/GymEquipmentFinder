@@ -44,6 +44,9 @@ heroku run python3 manage.py scrpe -a findweights
 ```bash
 heroku run python3 manage.py scrpe2 -a findweights
 ```
+```bash
+heroku run python3 manage.py alt -a findweights
+```
 
 
        #cmd = "INSERT INTO Plates (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"

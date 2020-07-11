@@ -35,12 +35,14 @@ def Alt():
                 productPrice=productPrice[1:]
             tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
             if tmp2:
-                tmp2.stock=inStock   
+                tmp2.stock=inStock  
+                print(tmp2) 
             else:
                 tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
+                print(tmp)
             db.session.commit()
-            print(dumbbell,tmp)
+      
 
 def XMark():
     #Barbell ..
