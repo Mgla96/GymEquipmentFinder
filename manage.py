@@ -40,7 +40,8 @@ def Alt():
                 tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
-            print("dumbbell")
+            print(dumbbell,tmp)
+
 def XMark():
     #Barbell ..
     response = get('https://www.xmarkfitness.com/bars/?limit=80')
