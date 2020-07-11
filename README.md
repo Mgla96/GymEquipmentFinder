@@ -48,6 +48,14 @@ heroku run python3 manage.py scrpe2 -a findweights
 heroku run python3 manage.py alt -a findweights
 ```
 
+# Commands to Directly use in Scheduler
+```bash
+python manage.py scrpe
+```
+```bash
+python manage.py scrpe2
+```
+
 
        #cmd = "INSERT INTO Plates (name, link, price, image, stock) VALUES (productName, productLink, productPrice, "", inStock) ON CONFLICT (id) DO UPDATE SET stock = excluded.stock, price = excluded.price)"
         #db.add(cmd)

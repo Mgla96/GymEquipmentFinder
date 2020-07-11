@@ -12,36 +12,54 @@ from bs4 import BeautifulSoup
 
 manager = Manager(app)
 def Alt():
-    response=get("https://www.xmarkfitness.com/free-weights/dumbbells/?limit=80")
+    #Racks
+    response = get('https://www.titan.fitness/racks/power-racks/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
-    dumbbells = html_soup.find_all('li',class_='Odd') #<li class="result-row">
-    dumbbells2 = html_soup.find_all('li',class_='Even')
-    dumbbells = dumbbells + dumbbells2
-    for dumbbell in dumbbells:
-        a=dumbbell.find("a",class_="pname")
-        productName=a.text
-        productLink=a.get("href")
-        productPrice=dumbbell.find("em",class_="p-price").text
-        outStock=dumbbell.find("a",class_="icon-Out")
-        inStock=dumbbell.find("a",class_="icon-Add")
-        if inStock:
-            inStock="In Stock"
-        elif outStock:
-            inStock=outStock.text
+    posts = html_soup.find_all('div',class_='product') #<li class="result-row">
+    for post in posts:
+        tst = post.find('div',class_='image-container')
+        prd = tst.find('img', class_='tile-image')
+        productName = prd.get('title')
+        if productName=="TITAN Series Power Rack":
+            continue
         else:
-            inStock="Out of stock"
-        if productName:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
-            tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
-            if tmp2:
-                tmp2.stock=inStock  
-                print(tmp2) 
+            productLink = 'https://www.titan.fitness/'+tst.find('a',class_='gtm-product-list').get('href')
+            prod = post.find('span',class_='value')
+            if prod:
+                productPrice=prod.get('content')
             else:
-                tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
-                print(tmp)
-            db.session.commit()
+                productPrice="?"
+            if productName and productPrice!="?":
+                if productPrice[0]=="$":
+                    productPrice=productPrice[1:]
+                ownPage = get(productLink)
+                html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+                page_container = html_soup2.find('span',class_='strong')
+                if not page_container:
+                    inStock = html_soup2.find('span',class_="in-stock")
+                    if inStock:
+                        inStock=inStock.text
+                        if inStock!="In Stock":
+                            inStock="Out of Stock"
+                    else:
+                        tmp = html_soup2.find('div',class_='attribute attribute-size')
+                        inStock=html_soup2.find('span',class_='availability-msg').text
+                        if inStock and "Select Styles for Availability" in inStock and tmp:
+                            a = tmp.find_all('option',value='null')
+                            b = tmp.find_all('option')
+                            if (len(b)-len(a))>1:
+                                inStock="In Stock"
+                            else:
+                                inStock="Out of Stock"
+                else:
+                    inStock = page_container.text
+                tmp2 = db.session.query(Racks).filter_by(name=productName).first()
+                if tmp2:
+                    tmp2.stock=inStock 
+                else:
+                    tmp = Racks(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                    db.session.add(tmp)
+                db.session.commit()
       
 
 def XMark():
@@ -332,7 +350,54 @@ def Titan():
                 db.session.add(tmp)
             db.session.commit()
     #Racks
-    
+    response = get('https://www.titan.fitness/racks/power-racks/?size=90')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    posts = html_soup.find_all('div',class_='product') #<li class="result-row">
+    for post in posts:
+        tst = post.find('div',class_='image-container')
+        prd = tst.find('img', class_='tile-image')
+        productName = prd.get('title')
+        if productName=="TITAN Series Power Rack":
+            continue
+        else:
+            productLink = 'https://www.titan.fitness/'+tst.find('a',class_='gtm-product-list').get('href')
+            prod = post.find('span',class_='value')
+            if prod:
+                productPrice=prod.get('content')
+            else:
+                productPrice="?"
+            if productName and productPrice!="?":
+                if productPrice[0]=="$":
+                    productPrice=productPrice[1:]
+                ownPage = get(productLink)
+                html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+                page_container = html_soup2.find('span',class_='strong')
+                if not page_container:
+                    inStock = html_soup2.find('span',class_="in-stock")
+                    if inStock:
+                        inStock=inStock.text
+                        if inStock!="In Stock":
+                            inStock="Out of Stock"
+                    else:
+                        tmp = html_soup2.find('div',class_='attribute attribute-size')
+                        inStock=html_soup2.find('span',class_='availability-msg').text
+                        if inStock and "Select Styles for Availability" in inStock and tmp:
+                            a = tmp.find_all('option',value='null')
+                            b = tmp.find_all('option')
+                            if (len(b)-len(a))>1:
+                                inStock="In Stock"
+                            else:
+                                inStock="Out of Stock"
+                else:
+                    inStock = page_container.text
+                tmp2 = db.session.query(Racks).filter_by(name=productName).first()
+                if tmp2:
+                    tmp2.stock=inStock 
+                else:
+                    tmp = Racks(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                    db.session.add(tmp)
+                db.session.commit()
+       
         
         
 
