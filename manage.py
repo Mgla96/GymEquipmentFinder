@@ -61,6 +61,66 @@ def Alt():
                     db.session.add(tmp)
                 db.session.commit()
       
+def Rogue():
+    #Barbell
+    response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    posts = html_soup.find_all('li',class_='item')
+    for post in posts:
+        search_header = post.find('div', class_='product-details')
+        productName = search_header.find('h2',class_='product-name').text
+        productLink = search_header.find('a').get('href')
+        productPrice = search_header.find('span',class_='price').text
+        ownPage = get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        page_container = html_soup2.find('div',class_='main-container')
+        tmp = page_container.find('div',class_='add-to-cart')
+        if tmp:
+            tmp2 = tmp.find('button')
+        else:
+            tmp2 = False
+        inStock="Out of Stock"
+        if tmp2:
+            if tmp2.text == "Add to Cart":
+                inStock="In Stock"
+        tmp3 = db.session.query(Bars).filter_by(name=productName).first()
+        if tmp3:
+            tmp3.stock=inStock 
+        else:
+            tmp4 = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            db.session.add(tmp4)
+        db.session.commit()
+
+    #Plates
+    response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers?limit=80')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    plates = html_soup.find_all('li',class_='item')
+    for plate in plates:
+        search_header = plate.find('div', class_='product-details')
+        productName = search_header.find('h2',class_='product-name').text
+        productLink = search_header.find('a').get('href')
+        productPrice = search_header.find('span',class_='price').text
+        ownPage = get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        page_container = html_soup2.find('div',class_='main-container')
+        tmp = page_container.find('div',class_='add-to-cart')
+        if tmp:
+            tmp2 = tmp.find('button')
+        else:
+            tmp2 = False
+        inStock="Out of Stock"
+        if tmp2:
+            if tmp2.text == "Add to Cart":
+                inStock="In Stock"
+        tmp3 = db.session.query(Plates).filter_by(name=productName).first()
+        if tmp3:
+            tmp3.stock=inStock 
+        else:
+            tmp4 = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            db.session.add(tmp4)
+        db.session.commit()
+
+
 
 def XMark():
     #Barbell ..
@@ -508,6 +568,7 @@ def scrpe():
 @manager.command
 def scrpe2():
     Fringe()
+    Rogue()
 @manager.command
 def alt(): 
     Alt()
