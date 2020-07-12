@@ -86,7 +86,6 @@ def Rogue():
         tmp3 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
-            tmp3.brand="Rogue"
         else:
             tmp4 = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp4)
@@ -116,7 +115,6 @@ def Rogue():
         tmp3 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
-            tmp3.brand="Rogue"
         else:
             tmp4 = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp4)
