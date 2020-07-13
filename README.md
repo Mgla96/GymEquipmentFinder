@@ -18,6 +18,11 @@ or if python3 linked to pip
 pip install -r requirements.txt
 ```
 
+# Saving dependencies in requirements.txt
+```bash
+pip3 freeze > requirements.txt
+```
+
 # Running
 ```bash
 python3 -m flask run

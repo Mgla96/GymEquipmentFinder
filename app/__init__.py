@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_talisman import Talisman
+from flask_compress import Compress
+#from flask_talisman import Talisman
 from config import Config
 
 app = Flask(__name__)
+Compress(app)
 '''
 csp = {
     'default-src': '\'self\'',
