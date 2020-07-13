@@ -667,7 +667,7 @@ def scrpe2():
     Vulcan()
 @manager.command
 def alt(): 
-    Alt()
+    REP()
 
 if __name__ == '__main__':
     manager.run()
