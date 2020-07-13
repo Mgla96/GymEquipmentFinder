@@ -83,9 +83,13 @@ def Rogue():
         if tmp2:
             if tmp2.text == "Add to Cart":
                 inStock="In Stock"
+        if productPrice:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
         tmp3 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
+            tmp3.price=productPrice 
         else:
             tmp4 = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp4)
@@ -112,9 +116,13 @@ def Rogue():
         if tmp2:
             if tmp2.text == "Add to Cart":
                 inStock="In Stock"
+        if productPrice:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
         tmp3 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
+            tmp3.price=productPrice
         else:
             tmp4 = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp4)
@@ -148,6 +156,7 @@ def XMark():
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                tmp2.price=productPrice
                 db.session.commit()
             else:
                 tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
@@ -178,6 +187,7 @@ def XMark():
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                tmp2.price=productPrice
                 db.session.commit()
             else:
                 tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
@@ -207,7 +217,8 @@ def XMark():
                 productPrice=productPrice[1:]
             tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
             if tmp2:
-                tmp2.stock=inStock   
+                tmp2.stock=inStock 
+                tmp2.price=productPrice  
             else:
                 tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -236,6 +247,7 @@ def REP():
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                tmp2.price=productPrice
             else:
                 tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -262,6 +274,7 @@ def REP():
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                tmp2.price=productPrice
             else:
                 tmp = Plates(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -288,7 +301,8 @@ def REP():
                 productPrice=productPrice[1:]
             tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
             if tmp2:
-                tmp2.stock=inStock     
+                tmp2.stock=inStock   
+                tmp2.price=productPrice  
             else:
                 tmp = Dumbbells(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -329,6 +343,7 @@ def Titan():
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
+                tmp2.price=productPrice
             else:
                 tmp = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -367,6 +382,7 @@ def Titan():
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock 
+                tmp2.price=productPrice
             else:
                 tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -404,6 +420,7 @@ def Titan():
             tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock 
+                tmp2.price=productPrice
             else:
                 tmp = Dumbbells(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
@@ -452,6 +469,7 @@ def Titan():
                 tmp2 = db.session.query(Racks).filter_by(name=productName).first()
                 if tmp2:
                     tmp2.stock=inStock 
+                    tmp2.price=productPrice
                 else:
                     tmp = Racks(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                     db.session.add(tmp)
@@ -504,6 +522,7 @@ def Fringe():
         tmp2 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp2:
             tmp2.stock=inStock
+            tmp2.price=productPrice
         else:
             tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
@@ -550,6 +569,7 @@ def Fringe():
         tmp2 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp2:
             tmp2.stock=inStock
+            tmp2.price=productPrice
         else:
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
