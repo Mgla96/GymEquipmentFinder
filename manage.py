@@ -575,6 +575,79 @@ def Fringe():
             db.session.add(tmp)
         db.session.commit()  
      
+def Vulcan():
+    #Cast Iron Plates
+    response = get('https://www.vulcanstrength.com/Vulcan-Cast-Iron-Olympic-Steel-Plates-p/v-ci-oly.htm?')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    posts = html_soup.find_all("tr",class_="Multi-Child_Background")
+    for post in posts: 
+        prod = post.find('td',class_='colors_productname')
+        if prod:
+            productName=prod.text
+        productPrice = post.find('span')
+        if productPrice: #hard one
+            if productPrice.text[0]=="$":
+                productPrice=productPrice.text
+        inStock = post.find('span',class_="out-of-stock")
+        if inStock:
+            if "Out of Stock" in inStock.text:
+                inStock = "Out of Stock"
+            else:
+                inStock = "In Stock"
+        else:
+            inStock="In Stock"
+        productLink="https://www.vulcanstrength.com/Vulcan-Cast-Iron-Olympic-Steel-Plates-p/v-ci-oly.htm?"
+        tmp2 = db.session.query(Plates).filter_by(name=productName).first()
+        if tmp2:
+            tmp2.stock=inStock
+            tmp2.price=productPrice
+        else:
+            tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            db.session.add(tmp)
+        db.session.commit()  
+
+    #Bumper Plates
+    response = get('https://www.vulcanstrength.com/Bumper-Plates-s/356.htm')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    tmp = html_soup.find('ul',class_="vnav--level3")
+    posts = tmp.find_all('a',class_='vnav__link') 
+    for post in posts:
+        productLink = post.get('href')
+        ownPage=get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        posts2 = html_soup2.find_all("tr",class_="Multi-Child_Background")
+        if len(posts2)>0:
+            for post2 in posts2: 
+                prod = post2.find('td',class_='colors_productname')
+                if prod:
+                    productName=prod.text
+                productPrice = post2.find('span')
+                if productPrice: 
+                    productPrice=productPrice.text
+                    if productPrice[0]=="$":
+                        productPrice=productPrice[1:]
+                
+                inStock = post.find('span',class_="out-of-stock")
+                if inStock:
+                    if "Out of Stock" in inStock.text:
+                        inStock = "Out of Stock"
+                    else:
+                        inStock = "In Stock"
+                else:
+                    inStock="In Stock"
+                tmp2 = db.session.query(Plates).filter_by(name=productName).first()
+                if tmp2:
+                    tmp2.stock=inStock
+                    tmp2.price=productPrice
+                else:
+                    tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                    db.session.add(tmp)
+                db.session.commit()  
+               
+
+
+
+
 
 @manager.command
 def hello():
@@ -588,6 +661,7 @@ def scrpe():
 def scrpe2():
     Fringe()
     Rogue()
+    Vulcan()
 @manager.command
 def alt(): 
     Alt()
