@@ -2,13 +2,20 @@ from flask import render_template, send_from_directory, request, make_response, 
 from app import app
 from .models import db, Bars, Plates, Racks, Dumbbells
 from flask_script import Manager
+from urllib.parse import urlparse, urlunparse
 
 manager = Manager(app)
 
 @app.before_request
 def before_request():
-    if not request.is_secure and app.env != "development":
-        return redirect("https://www.weightsinstock.com", code=301)
+    """Redirect non-www requests to www."""
+    urlparts = urlparse(request.url)
+    if urlparts.netloc == 'weightsinstock.com':
+        urlparts_list = list(urlparts)
+        urlparts_list[1] = 'www.weightsinstock.com'
+        return redirect(urlunparse(urlparts_list), code=301)
+    #if not request.is_secure and app.env != "development":
+        #return redirect("https://www.weightsinstock.com", code=301)
     
 
 @app.route('/')
