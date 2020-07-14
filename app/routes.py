@@ -1,9 +1,15 @@
-from flask import render_template, send_from_directory, request, make_response
+from flask import render_template, send_from_directory, request, make_response, redirect
 from app import app
 from .models import db, Bars, Plates, Racks, Dumbbells
-
 from flask_script import Manager
+
 manager = Manager(app)
+
+@app.before_request
+def before_request():
+    if not request.is_secure and app.env != "development":
+        return redirect("https://www.weightsinstock.com", code=301)
+    
 
 @app.route('/')
 @app.route('/index')
@@ -18,3 +24,4 @@ def index():
 @app.route('/sitemap.xml')
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
+

@@ -23,6 +23,11 @@ pip install -r requirements.txt
 pip3 freeze > requirements.txt
 ```
 
+# Seeing Custom Domains
+```bash
+heroku domains -a findweights
+```
+
 # Running
 ```bash
 python3 -m flask run
