@@ -58,13 +58,12 @@
         </div>
         <h4 class="">What This Tracks</h4>
         <p>So far, this site tracks deals from Rogue, Fringe Sports, REP, Vulcan, Titan Fitness, and XMark. When an item goes in stock
-            on these websites, it will automatically be updated here. More companies will be added soon!
+            on these websites, it will automatically be updated here. More companies will be added soon! If a section is blank that means everything is sold out :(
         </p>
         <div id="amzn-assoc-ad-fdfbafb9-b707-4aa3-b767-4088323c6306"></div>
         <script async
             src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=fdfbafb9-b707-4aa3-b767-4088323c6306"></script>
         <h4 class="">Barbells</h4>
-        <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
         <div class="content row">
             {%for bar in bars%}
             {% if bar.stock != "Out of Stock" and bar.stock!="Out of stock"%}
@@ -122,7 +121,6 @@
         <script async
             src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=97119ad9-0607-4835-b103-d0e41429b10e"></script>
         <h4 class="">Plates</h4>
-        <p>If you're not seeing anything this means everything is sold out and no deals are available :(</p>
         <div class="content row">
             {%for plate in plates%}
             {% if plate.stock != "Out of Stock" and plate.stock != "Out of stock"%}
