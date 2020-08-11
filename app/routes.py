@@ -19,10 +19,7 @@ def before_request():
 @app.route('/index')
 def index():
     db.create_all()
-    user={
-        'username':'Bill'
-    }
-    return render_template('index.html',title='Home',user=user,bars=Bars.query.all(),plates=Plates.query.all(),dumbbells=Dumbbells.query.all(),racks=Racks.query.all())
+    return render_template('index.html',title='Home',bars=Bars.query.all(),plates=Plates.query.all(),dumbbells=Dumbbells.query.all(),racks=Racks.query.all())
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
