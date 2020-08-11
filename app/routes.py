@@ -29,3 +29,7 @@ def index():
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
 
+@app.route('/ads.txt')
+def ads_txt():
+    return app.send_static_file("ads.txt")
+
