@@ -38,6 +38,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="#about">About</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#barbell">Barbells</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#plate">Plates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#dumbbell">Dumbbells</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#other">Other</a>
+            </li>
         </ul>
         </div>
     </nav>
@@ -67,7 +79,7 @@
         <div id="amzn-assoc-ad-fdfbafb9-b707-4aa3-b767-4088323c6306"></div>
         <script async
             src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=fdfbafb9-b707-4aa3-b767-4088323c6306"></script>
-        <h4 class="">Barbells</h4>
+        <h4 id="barbell" class="">Barbells</h4>
         <div class="content row">
             {%for bar in bars%}
             {% if bar.stock != "Out of Stock" and bar.stock!="Out of stock"%}
@@ -132,7 +144,7 @@
         <div id="amzn-assoc-ad-97119ad9-0607-4835-b103-d0e41429b10e"></div>
         <script async
             src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=97119ad9-0607-4835-b103-d0e41429b10e"></script>
-        <h4 class="">Plates</h4>
+        <h4 class="" id="plate">Plates</h4>
         <div class="content row">
             {%for plate in plates%}
             {% if plate.stock != "Out of Stock" and plate.stock != "Out of stock"%}
@@ -165,7 +177,7 @@
             src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=9d58f75a-3816-4b88-9f69-d958d437b1a7"></script>
 
         <div class="container-fluid pb-2 mb-3">
-            <h4 class="">Dumbbells</h4>
+            <h4 class="" id="dumbbell">Dumbbells</h4>
             <div class="content row">
                 {%for dumbbell in dumbbells%}
                 {% if dumbbell.stock != "Out of Stock" and dumbbell.stock!="Out of stock"%}
@@ -215,7 +227,7 @@
         </div>
 
         <div class="container-fluid pb-2 mb-3">
-            <h4 class="">Power Rack</h4>
+            <h4 class="" id="powerrack">Power Rack</h4>
             <div class="content row">
                 {%for rack in racks%}
                 {% if "out of stock" not in rack.stock.lower() %}
@@ -251,7 +263,7 @@
 
 
         <div class="container-fluid pb-2 mb-3">
-            <h4>Other Deals</h4>
+            <h4 id="other">Other Deals</h4>
             <p>I think T-Bar Rows are one of the best back exercises. I attached this platform to my power rack and for
                 a little over $40 total I think this is a pretty good deal to add to the exercise arsenal. Note: The all
                 black T-Bar row platform was sold out but I was able to purchase the same one in orange.</p>
