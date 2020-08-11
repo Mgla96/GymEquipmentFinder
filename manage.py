@@ -11,6 +11,14 @@ from random import randint
 from bs4 import BeautifulSoup
 
 manager = Manager(app)
+
+def randomWait():
+    tm=randint(2,7)
+    sleep(tm)
+#Fringe saying in stock for preorder
+#When page no longer there not deleting from db
+#Titan saying in stock when out of stock
+#Is this blocked by Titan Fitness?
 def Alt():
     #Racks
     response = get('https://www.titan.fitness/racks/power-racks/?size=90')
@@ -94,6 +102,8 @@ def Rogue():
             tmp4 = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp4)
         db.session.commit()
+        randomWait()
+
 
     #Plates
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/bumpers?limit=80')
@@ -127,7 +137,7 @@ def Rogue():
             tmp4 = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp4)
         db.session.commit()
-
+        randomWait()
 
 
 def XMark():
@@ -157,11 +167,11 @@ def XMark():
             if tmp2:
                 tmp2.stock=inStock
                 tmp2.price=productPrice
-                db.session.commit()
             else:
                 tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
-                db.session.commit()
+            db.session.commit()
+        randomWait()
     #Plates
     response = get('https://www.xmarkfitness.com/free-weights/weight-plates/?limit=80')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -188,11 +198,11 @@ def XMark():
             if tmp2:
                 tmp2.stock=inStock
                 tmp2.price=productPrice
-                db.session.commit()
             else:
                 tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
-                db.session.commit()  
+            db.session.commit() 
+        randomWait()
     #Dumbbell
     response=get("https://www.xmarkfitness.com/free-weights/dumbbells/?limit=80")
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -223,6 +233,7 @@ def XMark():
                 tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+        randomWait()
 
 def REP():
     #REP Men's 20KG Barbell - should be good
@@ -252,6 +263,7 @@ def REP():
                 tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+        randomWait()
     #REP Plates
     response = get('https://www.repfitness.com/catalogsearch/result/index/?cat=113&q=plates')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -281,6 +293,7 @@ def REP():
                 tmp = Plates(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+        randomWait()
     
     #REP dumbbell
     response = get('https://www.repfitness.com/conditioning/strength-equipment/dumbbells')
@@ -310,6 +323,7 @@ def REP():
                 tmp = Dumbbells(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+        randomWait()
     
 def Titan():
     #Weight Plates
@@ -351,6 +365,7 @@ def Titan():
                 tmp = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+        randomWait()
     #Barbells
     response = get('https://www.titan.fitness/strength/barbells/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -390,6 +405,7 @@ def Titan():
                 tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+        randomWait()
     #Dumbbells
     response = get('https://www.titan.fitness/strength/dumbbells/')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -428,6 +444,7 @@ def Titan():
                 tmp = Dumbbells(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                 db.session.add(tmp)
             db.session.commit()
+        randomWait()
     #Racks
     response = get('https://www.titan.fitness/racks/power-racks/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -477,10 +494,10 @@ def Titan():
                     tmp = Racks(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                     db.session.add(tmp)
                 db.session.commit()
+        randomWait()
        
         
         
-
 
 def Fringe():
     #Plates 
@@ -530,6 +547,7 @@ def Fringe():
             tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
         db.session.commit()
+        randomWait()
     #Barbells
     response = get('https://www.fringesport.com/collections/barbells/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -577,6 +595,7 @@ def Fringe():
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
         db.session.commit()  
+        randomWait()
      
 def Vulcan():
     #Cast Iron Plates
@@ -608,6 +627,7 @@ def Vulcan():
             tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             db.session.add(tmp)
         db.session.commit()  
+        randomWait()
 
     #Bumper Plates
     response = get('https://www.vulcanstrength.com/Bumper-Plates-s/356.htm')
@@ -646,11 +666,8 @@ def Vulcan():
                     tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
                     db.session.add(tmp)
                 db.session.commit()  
+        randomWait()
                
-
-
-
-
 
 @manager.command
 def hello():
