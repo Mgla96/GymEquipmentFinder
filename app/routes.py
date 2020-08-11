@@ -12,7 +12,7 @@ def before_request():
     urlparts = urlparse(request.url)
     if urlparts.netloc == 'weightsinstock.com':
         urlparts_list = list(urlparts)
-        urlparts_list[1] = 'www.weightsinstock.com'
+        urlparts_list[1] = 'https://www.weightsinstock.com'
         return redirect(urlunparse(urlparts_list), code=301)
 
 @app.route('/')
