@@ -20,7 +20,7 @@ class Bars(db.Model):
     link = db.Column(
         db.String(160),
         index=True,
-        unique=True,
+        unique=False,
         nullable=False
     )
     price = db.Column(
@@ -63,7 +63,7 @@ class Plates(db.Model):
     link = db.Column(
         db.String(160),
         index=True,
-        unique=True,
+        unique=False,
         nullable=False
     )
     price = db.Column(
@@ -107,7 +107,7 @@ class Dumbbells(db.Model):
     link = db.Column(
         db.String(160),
         index=True,
-        unique=True,
+        unique=False,
         nullable=False
     )
     price = db.Column(
@@ -150,7 +150,7 @@ class Racks(db.Model):
     link = db.Column(
         db.String(160),
         index=True,
-        unique=True,
+        unique=False,
         nullable=False
     )
     price = db.Column(
