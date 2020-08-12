@@ -13,12 +13,13 @@ from bs4 import BeautifulSoup
 manager = Manager(app)
 
 def randomWait():
-    tm=randint(2,7)
+    tm=randint(1,6)
     sleep(tm)
 #Fringe saying in stock for preorder
 #When page no longer there not deleting from db
 #Titan saying in stock when out of stock
 #Is this blocked by Titan Fitness?
+
 def Alt():
     #Racks
     response = get('https://www.titan.fitness/racks/power-racks/?size=90')
@@ -653,14 +654,15 @@ def Vulcan():
         if productPrice: #hard one
             if productPrice.text[0]=="$":
                 productPrice=productPrice.text
-        inStock = post.find('span',class_="out-of-stock")
+        inStock = post.find('span',class_="in-stock")     
         if inStock:
             if "Out of Stock" in inStock.text:
                 inStock = "Out of Stock"
             else:
                 inStock = "In Stock"
         else:
-            inStock="In Stock"
+            inStock="Out of Stock"
+        
         productLink="https://www.vulcanstrength.com/Vulcan-Cast-Iron-Olympic-Steel-Plates-p/v-ci-oly.htm?"
         tmp2 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp2:
@@ -696,14 +698,14 @@ def Vulcan():
                     if productPrice[0]=="$":
                         productPrice=productPrice[1:]
                 
-                inStock = post.find('span',class_="out-of-stock")
+                inStock = post.find('span',class_="in-stock")     
                 if inStock:
                     if "Out of Stock" in inStock.text:
                         inStock = "Out of Stock"
                     else:
                         inStock = "In Stock"
                 else:
-                    inStock="In Stock"
+                    inStock="Out of Stock"
                 tmp2 = db.session.query(Plates).filter_by(name=productName).first()
                 if tmp2:
                     tmp2.stock=inStock
@@ -733,7 +735,28 @@ def scrpe2():
     Fringe()
 @manager.command
 def alt(): 
-    REP()
+    Vulcan()
 
 if __name__ == '__main__':
     manager.run()
+
+
+
+
+
+
+
+
+
+'''
+extras
+        inStock = post.find('span',class_="out-of-stock")
+        if inStock:
+            if "Out of Stock" in inStock.text:
+                inStock = "Out of Stock"
+            else:
+                inStock = "In Stock"
+        else:
+            inStock="In Stock"
+
+'''
