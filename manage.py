@@ -66,7 +66,10 @@ def Alt():
                     tmp2.stock=inStock 
                 else:
                     tmp = Racks(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                    db.session.add(tmp)
+                    try:
+                        db.session.add(tmp)
+                    except:
+                        print("exception occured")
                 db.session.commit()
       
 def Rogue():
@@ -100,7 +103,10 @@ def Rogue():
             tmp3.price=productPrice 
         else:
             tmp4 = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            db.session.add(tmp4)
+            try:
+                db.session.add(tmp4)
+            except:
+                print("exception occured rogue")
         db.session.commit()
         randomWait()
 
@@ -135,7 +141,10 @@ def Rogue():
             tmp3.price=productPrice
         else:
             tmp4 = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            db.session.add(tmp4)
+            try:
+                db.session.add(tmp4)
+            except:
+                print("exception occured rogue plate")
         db.session.commit()
         randomWait()
 
@@ -169,7 +178,10 @@ def XMark():
                 tmp2.price=productPrice
             else:
                 tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured xmark")
             db.session.commit()
         randomWait()
     #Plates
@@ -200,7 +212,10 @@ def XMark():
                 tmp2.price=productPrice
             else:
                 tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured xmark plates")
             db.session.commit() 
         randomWait()
     #Dumbbell
@@ -231,7 +246,10 @@ def XMark():
                 tmp2.price=productPrice  
             else:
                 tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured xmark dumbbell")
             db.session.commit()
         randomWait()
 
@@ -261,7 +279,10 @@ def REP():
                 tmp2.price=productPrice
             else:
                 tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured")
             db.session.commit()
         randomWait()
     #REP Plates
@@ -291,7 +312,10 @@ def REP():
                 tmp2.price=productPrice
             else:
                 tmp = Plates(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured")
             db.session.commit()
         randomWait()
     
@@ -321,7 +345,10 @@ def REP():
                 tmp2.price=productPrice  
             else:
                 tmp = Dumbbells(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured")
             db.session.commit()
         randomWait()
     
@@ -363,7 +390,10 @@ def Titan():
                 tmp2.price=productPrice
             else:
                 tmp = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured")
             db.session.commit()
         randomWait()
     #Barbells
@@ -403,7 +433,10 @@ def Titan():
                 tmp2.price=productPrice
             else:
                 tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured")
             db.session.commit()
         randomWait()
     #Dumbbells
@@ -442,7 +475,10 @@ def Titan():
                 tmp2.price=productPrice
             else:
                 tmp = Dumbbells(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                db.session.add(tmp)
+                try:
+                    db.session.add(tmp)
+                except:
+                    print("exception occured")
             db.session.commit()
         randomWait()
     #Racks
@@ -492,13 +528,14 @@ def Titan():
                     tmp2.price=productPrice
                 else:
                     tmp = Racks(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                    db.session.add(tmp)
+                    try:
+                        db.session.add(tmp)
+                    except:
+                        print("exception occured")
                 db.session.commit()
         randomWait()
        
         
-        
-
 def Fringe():
     #Plates 
     response = get('https://www.fringesport.com/collections/bumper-plates/?size=90')
@@ -545,7 +582,10 @@ def Fringe():
             tmp2.price=productPrice
         else:
             tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            db.session.add(tmp)
+            try:
+                db.session.add(tmp)
+            except:
+                print("exception occured")
         db.session.commit()
         randomWait()
     #Barbells
@@ -593,7 +633,10 @@ def Fringe():
             tmp2.price=productPrice
         else:
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            db.session.add(tmp)
+            try:
+                db.session.add(tmp)
+            except:
+                print("exception occured")
         db.session.commit()  
         randomWait()
      
@@ -625,7 +668,10 @@ def Vulcan():
             tmp2.price=productPrice
         else:
             tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            db.session.add(tmp)
+            try:
+                db.session.add(tmp)
+            except:
+                print("exception occured")
         db.session.commit()  
         randomWait()
 
@@ -664,7 +710,10 @@ def Vulcan():
                     tmp2.price=productPrice
                 else:
                     tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                    db.session.add(tmp)
+                    try:
+                        db.session.add(tmp)
+                    except:
+                        print("exception occured")
                 db.session.commit()  
         randomWait()
                
@@ -679,9 +728,9 @@ def scrpe():
     Titan()    
 @manager.command
 def scrpe2():
-    Fringe()
     Rogue()
     Vulcan()
+    Fringe()
 @manager.command
 def alt(): 
     REP()
