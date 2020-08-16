@@ -222,6 +222,39 @@
         </div>
 
         <div class="container-fluid pb-2 mb-3">
+            <h4 class="" id="dumbbell">Kettlebells</h4>
+            <div class="content row">
+                {%for kettlebell in kettlebells%}
+                {% if kettlebell.stock.lower() != "out of stock"%}
+                <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
+                    <div class="card" style="font-size:80%; width: 18rem;">
+                        <div class="card-body">
+                            <h6 class="card-title" style="font-weight: bold;">{{kettlebell.name}}</h6>
+                            <div class="row">
+                                <div class="col">
+                                    <h7 class="card-subtitle mb-2 text-muted">{{kettlebell.brand}}</h7>
+                                    <br>
+                                    <h7 class="card-subtitle mb-2 text-muted">${{kettlebell.price}}</h7>
+                                </div>
+                                <div class="col">
+                                    <h7 class="card-subtitle mb-2 text-muted">{{kettlebell.stock}}</h7>
+                                    <br>
+                                    <a href="{{kettlebell.link}}" class="card-link mb-2">Link</a>
+                                </div>
+                            </div>
+                            <p class="card-text">{{kettlebell.image}}</p>
+                        </div>
+                    </div>
+                </div>
+                {%endif%}
+                {%endfor%}
+            </div>
+
+        </div>
+
+
+
+        <div class="container-fluid pb-2 mb-3">
             <h4 class="" id="powerrack">Power Rack</h4>
             <div class="content row">
                 {%for rack in racks%}

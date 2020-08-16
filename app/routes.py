@@ -1,6 +1,6 @@
 from flask import render_template, send_from_directory, request, make_response, redirect
 from app import app
-from .models import db, Bars, Plates, Racks, Dumbbells
+from .models import db, Bars, Plates, Racks, Dumbbells,Kettlebells
 from flask_script import Manager
 from urllib.parse import urlparse, urlunparse
 
@@ -22,7 +22,7 @@ def before_request():
 @app.route('/index')
 def index():
     db.create_all()
-    return render_template('index.html',title='Home',bars=Bars.query.all(),plates=Plates.query.all(),dumbbells=Dumbbells.query.all(),racks=Racks.query.all())
+    return render_template('index.html',title='Home',bars=Bars.query.all(),plates=Plates.query.all(),dumbbells=Dumbbells.query.all(),racks=Racks.query.all(),kettlebells=Kettlebells.query.all())
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
