@@ -2,7 +2,7 @@ import os
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from app import app, db
-from app.models import Bars, Plates, Dumbbells, Racks
+from app.models import Bars, Plates, Dumbbells, Racks, Kettlebells
 
 from time import sleep
 import re
