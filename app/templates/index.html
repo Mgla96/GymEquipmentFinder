@@ -43,6 +43,7 @@
                 <a class="nav-item nav-link" href="#barbell">Barbells</a>
                 <a class="nav-item nav-link" href="#plate">Plates</a>
                 <a class="nav-item nav-link" href="#dumbbell">Dumbbells</a>
+                <a class="nav-item nav-link" href="#kettlebell">Kettlebells</a>
                 <a class="nav-item nav-link" href="#other">Other</a>
               </div>
         </div>
@@ -222,7 +223,7 @@
         </div>
 
         <div class="container-fluid pb-2 mb-3">
-            <h4 class="" id="dumbbell">Kettlebells</h4>
+            <h4 class="" id="kettlebell">Kettlebells</h4>
             <div class="content row">
                 {%for kettlebell in kettlebells%}
                 {% if kettlebell.stock.lower() != "out of stock"%}
