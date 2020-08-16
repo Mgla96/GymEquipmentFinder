@@ -21,57 +21,41 @@ def randomWait():
 #Is this blocked by Titan Fitness?
 
 def Alt():
-    #Racks
-    response = get('https://www.titan.fitness/racks/power-racks/?size=90')
+    #Rogue Kettlebells
+    response = get('https://www.roguefitness.com/conditioning/strength-equipment/kettlebells?gclid=Cj0KCQjwsuP5BRCoARIsAPtX_wFq_3o7IKH_cRBzNgiGG-j2joxuDmEqrMjtmvwilehXiI0nNIgtvyEaArd8EALw_wcB?limit=80')
     html_soup = BeautifulSoup(response.text, 'html.parser')
-    posts = html_soup.find_all('div',class_='product') #<li class="result-row">
+    posts = html_soup.find_all('li',class_='item')
     for post in posts:
-        tst = post.find('div',class_='image-container')
-        prd = tst.find('img', class_='tile-image')
-        productName = prd.get('title')
-        if productName=="TITAN Series Power Rack":
-            continue
+        search_header = post.find('div', class_='product-details')
+        productName = search_header.find('h2',class_='product-name').text
+        productLink = search_header.find('a').get('href')
+        productPrice = search_header.find('span',class_='price').text
+        ownPage = get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        page_container = html_soup2.find('div',class_='main-container')
+        tmp = page_container.find('div',class_='add-to-cart')
+        if tmp:
+            tmp2 = tmp.find('button')
         else:
-            productLink = 'https://www.titan.fitness/'+tst.find('a',class_='gtm-product-list').get('href')
-            prod = post.find('span',class_='value')
-            if prod:
-                productPrice=prod.get('content')
-            else:
-                productPrice="?"
-            if productName and productPrice!="?":
-                if productPrice[0]=="$":
-                    productPrice=productPrice[1:]
-                ownPage = get(productLink)
-                html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-                page_container = html_soup2.find('span',class_='strong')
-                if not page_container:
-                    inStock = html_soup2.find('span',class_="in-stock")
-                    if inStock:
-                        inStock=inStock.text
-                        if inStock!="In Stock":
-                            inStock="Out of Stock"
-                    else:
-                        tmp = html_soup2.find('div',class_='attribute attribute-size')
-                        inStock=html_soup2.find('span',class_='availability-msg').text
-                        if inStock and "Select Styles for Availability" in inStock and tmp:
-                            a = tmp.find_all('option',value='null')
-                            b = tmp.find_all('option')
-                            if (len(b)-len(a))>1:
-                                inStock="In Stock"
-                            else:
-                                inStock="Out of Stock"
-                else:
-                    inStock = page_container.text
-                tmp2 = db.session.query(Racks).filter_by(name=productName).first()
-                if tmp2:
-                    tmp2.stock=inStock 
-                else:
-                    tmp = Racks(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                    try:
-                        db.session.add(tmp)
-                    except:
-                        print("exception occured")
-                db.session.commit()
+            tmp2 = False
+        inStock="Out of Stock"
+        if tmp2:
+            if tmp2.text == "Add to Cart":
+                inStock="In Stock"
+        if productPrice:
+            if productPrice[0]=="$":
+                productPrice=productPrice[1:]
+        tmp3 = db.session.query(Bars).filter_by(name=productName).first()
+        if tmp3:
+            tmp3.stock=inStock 
+            tmp3.price=productPrice 
+        else:
+            tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            try:
+                db.session.add(tmp4)
+            except:
+                print("exception occured rogue")
+        db.session.commit()
       
 def Rogue():
     #Barbell
