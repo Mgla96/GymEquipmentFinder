@@ -45,7 +45,7 @@ def Alt():
         if productPrice:
             if productPrice[0]=="$":
                 productPrice=productPrice[1:]
-        tmp3 = db.session.query(Bars).filter_by(name=productName).first()
+        tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
             tmp3.price=productPrice 
