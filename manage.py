@@ -51,6 +51,7 @@ def Alt():
             tmp3.price=productPrice 
         else:
             tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            print(tmp4)
             try:
                 db.session.add(tmp4)
             except:
@@ -761,7 +762,7 @@ def scrpe2():
     Fringe()
 @manager.command
 def alt(): 
-    Vulcan()
+    Alt()
 
 if __name__ == '__main__':
     manager.run()
