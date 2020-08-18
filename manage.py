@@ -762,7 +762,8 @@ def scrpe2():
     Fringe()
 @manager.command
 def alt(): 
-    Alt()
+    Rogue()
+    REP()
 
 if __name__ == '__main__':
     manager.run()
