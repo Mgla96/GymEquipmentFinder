@@ -21,7 +21,7 @@ def randomWait():
 #Is this blocked by Titan Fitness?
 
 def Alt():
-    #Rogue Kettlebells
+    #rogue kettlebell
     response = get('https://www.roguefitness.com/conditioning/strength-equipment/kettlebells?gclid=Cj0KCQjwsuP5BRCoARIsAPtX_wFq_3o7IKH_cRBzNgiGG-j2joxuDmEqrMjtmvwilehXiI0nNIgtvyEaArd8EALw_wcB?limit=80')
     html_soup = BeautifulSoup(response.text, 'html.parser')
     posts = html_soup.find_all('li',class_='item')
@@ -43,15 +43,15 @@ def Alt():
             if tmp2.text == "Add to Cart":
                 inStock="In Stock"
         if productPrice:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
         tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
             tmp3.price=productPrice 
         else:
             tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            print(tmp4)
             try:
                 db.session.add(tmp4)
             except:
@@ -83,8 +83,11 @@ def Rogue():
             if tmp2.text == "Add to Cart":
                 inStock="In Stock"
         if productPrice:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            #if productPrice[0]=="$":
+            #    productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
         tmp3 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
@@ -120,8 +123,9 @@ def Rogue():
             if tmp2.text == "Add to Cart":
                 inStock="In Stock"
         if productPrice:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
         tmp3 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
@@ -157,8 +161,9 @@ def Rogue():
             if tmp2.text == "Add to Cart":
                 inStock="In Stock"
         if productPrice:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
         tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
         if tmp3:
             tmp3.stock=inStock 
@@ -194,8 +199,9 @@ def XMark():
         else:
             inStock="Out of stock"
         if productName:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
@@ -228,8 +234,9 @@ def XMark():
         else:
             inStock="Out of stock"
         if productName:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
@@ -262,8 +269,9 @@ def XMark():
         else:
             inStock="Out of stock"
         if productName:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
             tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock 
@@ -295,8 +303,9 @@ def REP():
         if not inStock:
             inStock=""
         if productName:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
             tmp2 = db.session.query(Bars).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock
@@ -327,8 +336,9 @@ def REP():
         if not inStock:
             inStock=""
         if productName:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
             
             tmp2 = db.session.query(Plates).filter_by(name=productName).first()
             if tmp2:
@@ -361,8 +371,9 @@ def REP():
         if not inStock:
             inStock=""
         if productName:
-            if productPrice[0]=="$":
-                productPrice=productPrice[1:]
+            test = productPrice.find("$")
+            if test!=-1:
+                productPrice=productPrice[test+1:]
             tmp2 = db.session.query(Dumbbells).filter_by(name=productName).first()
             if tmp2:
                 tmp2.stock=inStock   
