@@ -9,13 +9,13 @@ manager = Manager(app)
 @app.before_request
 def before_request():
     """Redirect non-www requests to www."""
-    """
+    '''
     urlparts = urlparse(request.url)
     if urlparts.netloc == 'weightsinstock.com':
         urlparts_list = list(urlparts)
         urlparts_list[1] = 'https://www.weightsinstock.com'
         return redirect(urlunparse(urlparts_list), code=301)
-    """
+    '''
     if request.url.startswith('http://'):
         url=request.url.replace('http://','https://',1)
         return redirect(url,code=301)
