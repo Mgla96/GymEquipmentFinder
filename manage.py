@@ -657,7 +657,7 @@ def Fringe():
         if soldout:
             if "Sold Out" in soldout.text:
                 inStock="Out of Stock"
-            elif "Pre-Order" in soldout.text or "Pre-Order" in productName:
+            elif "Pre-Order" in soldout.text or "pre-" in productName.lower():
                 inStock="Backorder"
             else:
                 inStock="In Stock"
@@ -709,7 +709,7 @@ def Fringe():
         if soldout:
             if "Sold Out" in soldout.text:
                 inStock="Out of Stock"
-            elif "Pre-Order" in soldout.text or "Pre-Order" in productName:
+            elif "Pre-Order" in soldout.text or "pre-" in productName.lower():
                 inStock="Backorder"
             else:
                 inStock="In Stock"
