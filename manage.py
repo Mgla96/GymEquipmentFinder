@@ -822,7 +822,7 @@ def scrpe2():
     Fringe()
 @manager.command
 def alt(): 
-    Alt()
+    Fringe()
 
 if __name__ == '__main__':
     manager.run()
