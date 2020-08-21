@@ -585,12 +585,12 @@ def Fringe():
         if soldout:
             if "Sold Out" in soldout.text:
                 inStock="Out of Stock"
-            elif "Pre-Order" in soldout.text or "pre-" in productName.lower():
+            elif "Pre-Order" in soldout.text or "order" in productName.lower():
                 inStock="Backorder"
             else:
                 inStock="In Stock"
         else:
-            if "pre-" in productName.lower():
+            if "order" in productName.lower():
                 inStock="Backorder"
             else:
                 inStock="In Stock"
@@ -632,12 +632,12 @@ def Fringe():
         if soldout:
             if "Sold Out" in soldout.text:
                 inStock="Out of Stock"
-            elif "Pre-Order" in soldout.text or "pre-" in productName.lower():
+            elif "Pre-Order" in soldout.text or "order" in productName.lower():
                 inStock="Backorder"
             else:
                 inStock="In Stock"
         else:
-            if "pre-" in productName.lower():
+            if "order" in productName.lower():
                 inStock="Backorder"
             else:
                 inStock="In Stock"
@@ -750,28 +750,12 @@ def scrpe2():
     Fringe()
 @manager.command
 def alt(): 
-    Alt()
+    Fringe()
+
+@manager.command
+def Titan(): 
+    Titan()
 
 if __name__ == '__main__':
     manager.run()
 
-
-
-
-
-
-
-
-
-'''
-extras
-        inStock = post.find('span',class_="out-of-stock")
-        if inStock:
-            if "Out of Stock" in inStock.text:
-                inStock = "Out of Stock"
-            else:
-                inStock = "In Stock"
-        else:
-            inStock="In Stock"
-
-'''
