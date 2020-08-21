@@ -37,6 +37,8 @@ def Alt():
         grouped_items = page_container.find_all('div',class_="grouped-item")
         for group in grouped_items:
             item_name=group.find("div",class_="item-name").text
+            if "Monster" in productName:
+                item_name="Monster "+item_name
             item_price=group.find("span",class_="price").text
             item_price=formatPrice(item_price)
             if group.find("div",class_="item-qty input-text"):
@@ -179,6 +181,8 @@ def Rogue():
     
         for group in grouped_items:
             item_name=group.find("div",class_="item-name").text
+            if "Monster" in productName:
+                item_name="Monster "+item_name
             item_price=group.find("span",class_="price").text
             item_price=formatPrice(item_price)
             if group.find("div",class_="item-qty input-text"):
