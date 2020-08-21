@@ -15,13 +15,14 @@ manager = Manager(app)
 def randomWait():
     tm=randint(1,6)
     sleep(tm)
-#Fringe saying in stock for preorder
-#When page no longer there not deleting from db
-#Titan saying in stock when out of stock
-#Is this blocked by Titan Fitness?
+
+def formatPrice(price):
+    price=price.replace("$","")
+    price=price.replace("\n","")
+    return price
 
 def Alt():
-    #rogue kettlebell
+    #Rogue Kettlebells
     response = get('https://www.roguefitness.com/conditioning/strength-equipment/kettlebells?gclid=Cj0KCQjwsuP5BRCoARIsAPtX_wFq_3o7IKH_cRBzNgiGG-j2joxuDmEqrMjtmvwilehXiI0nNIgtvyEaArd8EALw_wcB?limit=80')
     html_soup = BeautifulSoup(response.text, 'html.parser')
     posts = html_soup.find_all('li',class_='item')
@@ -33,30 +34,52 @@ def Alt():
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         page_container = html_soup2.find('div',class_='main-container')
-        tmp = page_container.find('div',class_='add-to-cart')
-        if tmp:
-            tmp2 = tmp.find('button')
-        else:
-            tmp2 = False
-        inStock="Out of Stock"
-        if tmp2:
-            if tmp2.text == "Add to Cart":
-                inStock="In Stock"
-        if productPrice:
-            test = productPrice.find("$")
-            if test!=-1:
-                productPrice=productPrice[test+1:]
-        tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
-        if tmp3:
-            tmp3.stock=inStock 
-            tmp3.price=productPrice 
-        else:
-            tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            try:
-                db.session.add(tmp4)
-            except:
-                print("exception occured rogue")
-        db.session.commit()
+        grouped_items = page_container.find_all('div',class_="grouped-item")
+        for group in grouped_items:
+            item_name=group.find("div",class_="item-name").text
+            item_price=group.find("span",class_="price").text
+            item_price=formatPrice(item_price)
+            if group.find("div",class_="item-qty input-text"):
+                item_stock=True
+            else:
+                item_stock=False
+            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
+            if tmp3:
+                tmp3.stock=inStock 
+                tmp3.price=productPrice 
+            else:
+                tmp4 = Kettlebells(name=item_name,brand="Rogue",link=productLink[:160],price=item_price[:12],image="",stock=item_stock)
+                try:
+                    db.session.add(tmp4)
+                except:
+                    print("exception")
+            db.session.commit()
+        if not grouped_items:
+            tmp = page_container.find('div',class_='add-to-cart')
+            if tmp:
+                tmp2 = tmp.find('button')
+            else:
+                tmp2 = False
+            inStock="Out of Stock"
+            if tmp2:
+                if tmp2.text == "Add to Cart":
+                    inStock="In Stock"
+            if productPrice:
+                test = productPrice.find("$")
+                if test!=-1:
+                    productPrice=productPrice[test+1:]
+            
+            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
+            if tmp3:
+                tmp3.stock=inStock 
+                tmp3.price=productPrice 
+            else:
+                tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                try:
+                    db.session.add(tmp4)
+                except:
+                    print("exception occured rogue")
+            db.session.commit()
         randomWait()
     
       
@@ -151,30 +174,54 @@ def Rogue():
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         page_container = html_soup2.find('div',class_='main-container')
-        tmp = page_container.find('div',class_='add-to-cart')
-        if tmp:
-            tmp2 = tmp.find('button')
-        else:
-            tmp2 = False
-        inStock="Out of Stock"
-        if tmp2:
-            if tmp2.text == "Add to Cart":
-                inStock="In Stock"
-        if productPrice:
-            test = productPrice.find("$")
-            if test!=-1:
-                productPrice=productPrice[test+1:]
-        tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
-        if tmp3:
-            tmp3.stock=inStock 
-            tmp3.price=productPrice 
-        else:
-            tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-            try:
-                db.session.add(tmp4)
-            except:
-                print("exception occured rogue")
-        db.session.commit()
+
+        grouped_items = page_container.find_all('div',class_="grouped-item")
+    
+        for group in grouped_items:
+            item_name=group.find("div",class_="item-name").text
+            item_price=group.find("span",class_="price").text
+            item_price=formatPrice(item_price)
+            if group.find("div",class_="item-qty input-text"):
+                item_stock=True
+            else:
+                item_stock=False
+            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
+            if tmp3:
+                tmp3.stock=inStock 
+                tmp3.price=productPrice 
+            else:
+                tmp4 = Kettlebells(name=item_name,brand="Rogue",link=productLink[:160],price=item_price[:12],image="",stock=item_stock)
+                try:
+                    db.session.add(tmp4)
+                except:
+                    print("exception occured rogue")
+            db.session.commit()
+        if not grouped_items:
+            tmp = page_container.find('div',class_='add-to-cart')
+            if tmp:
+                tmp2 = tmp.find('button')
+            else:
+                tmp2 = False
+            inStock="Out of Stock"
+            if tmp2:
+                if tmp2.text == "Add to Cart":
+                    inStock="In Stock"
+            if productPrice:
+                test = productPrice.find("$")
+                if test!=-1:
+                    productPrice=productPrice[test+1:]
+            
+            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
+            if tmp3:
+                tmp3.stock=inStock 
+                tmp3.price=productPrice 
+            else:
+                tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                try:
+                    db.session.add(tmp4)
+                except:
+                    print("exception occured rogue")
+            db.session.commit()
         randomWait()
 
 
@@ -328,7 +375,7 @@ def REP():
         productName = prodInfo.text[:-2]
         productLink = prodInfo.find('a').get('href')
         productPrice = pricecont.find('span',class_='price').text[1::]
-        productPrice = productPrice.replace(" ","")
+        productPrice = formatPrice(productPrice)
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
@@ -363,7 +410,7 @@ def REP():
         productName = prodInfo.text[:-2]
         productLink = prodInfo.find('a').get('href')
         productPrice = pricecont.find('span',class_='price').text[1::]
-        productPrice = productPrice.replace(" ","")
+        productPrice = formatPrice(productPrice)
         ownPage = get(productLink)
         html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
         info = html_soup2.find('p',class_='availability')
@@ -592,8 +639,7 @@ def Fringe():
         productPrice=omega.find("span",class_="current_price")
         if productPrice:
             productPrice=productPrice.text
-            productPrice=productPrice.replace(" ","")
-            productPrice=productPrice.replace("\n","")
+            productPrice=formatPrice(productPrice)
             if productPrice:
                 if productPrice[0]!="$":
                     productPrice="None"
@@ -645,8 +691,7 @@ def Fringe():
         productPrice=omega.find("span",class_="current_price")
         if productPrice:
             productPrice=productPrice.text
-            productPrice=productPrice.replace(" ","")
-            productPrice=productPrice.replace("\n","")
+            productPrice=formatPrice(productPrice)
             if productPrice:
                 if productPrice[0]!="$":
                     productPrice="None"
@@ -773,8 +818,7 @@ def scrpe2():
     Fringe()
 @manager.command
 def alt(): 
-    Rogue()
-    REP()
+    Alt()
 
 if __name__ == '__main__':
     manager.run()
