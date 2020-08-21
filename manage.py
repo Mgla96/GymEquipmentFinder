@@ -45,8 +45,8 @@ def Alt():
                 item_stock=False
             tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
             if tmp3:
-                tmp3.stock=inStock 
-                tmp3.price=productPrice 
+                tmp3.stock=item_stock 
+                tmp3.price=item_price 
             else:
                 tmp4 = Kettlebells(name=item_name,brand="Rogue",link=productLink[:160],price=item_price[:12],image="",stock=item_stock)
                 try:
@@ -187,8 +187,8 @@ def Rogue():
                 item_stock=False
             tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
             if tmp3:
-                tmp3.stock=inStock 
-                tmp3.price=productPrice 
+                tmp3.stock=item_stock 
+                tmp3.price=item_price 
             else:
                 tmp4 = Kettlebells(name=item_name,brand="Rogue",link=productLink[:160],price=item_price[:12],image="",stock=item_stock)
                 try:
