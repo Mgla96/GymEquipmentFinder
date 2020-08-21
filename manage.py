@@ -40,9 +40,9 @@ def Alt():
             item_price=group.find("span",class_="price").text
             item_price=formatPrice(item_price)
             if group.find("div",class_="item-qty input-text"):
-                item_stock=True
+                item_stock="In Stock"
             else:
-                item_stock=False
+                item_stock="Out of Stock"
             tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
             if tmp3:
                 tmp3.stock=item_stock 
@@ -182,9 +182,9 @@ def Rogue():
             item_price=group.find("span",class_="price").text
             item_price=formatPrice(item_price)
             if group.find("div",class_="item-qty input-text"):
-                item_stock=True
+                item_stock="In Stock"
             else:
-                item_stock=False
+                item_stock="Out of Stock"
             tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
             if tmp3:
                 tmp3.stock=item_stock 
