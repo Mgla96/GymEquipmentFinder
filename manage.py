@@ -752,10 +752,6 @@ def scrpe2():
 def alt(): 
     Fringe()
 
-@manager.command
-def Titan(): 
-    Titan()
-
 if __name__ == '__main__':
     manager.run()
 
