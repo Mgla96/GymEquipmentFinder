@@ -662,7 +662,10 @@ def Fringe():
             else:
                 inStock="In Stock"
         else:
-            inStock="In Stock"
+            if "pre-" in productName.lower():
+                inStock="Backorder"
+            else:
+                inStock="In Stock"
         tmp2 = db.session.query(Plates).filter_by(name=productName).first()
         if tmp2:
             tmp2.stock=inStock
@@ -714,7 +717,10 @@ def Fringe():
             else:
                 inStock="In Stock"
         else:
-            inStock="In Stock"
+            if "pre-" in productName.lower():
+                inStock="Backorder"
+            else:
+                inStock="In Stock"
         tmp2 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp2:
             tmp2.stock=inStock
