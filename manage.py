@@ -588,12 +588,10 @@ def Fringe():
                 inStock="Out of Stock"
             elif "Pre-Order" in soldout.text or "order" in productName.lower():
                 inStock="Backorder"
-                print("backorder")
             else:
                 inStock="In Stock"
         else:
             if "order" in productName.lower():
-                print(productName)
                 inStock="Backorder"
             else:
                 inStock="In Stock"
@@ -607,6 +605,7 @@ def Fringe():
                 db.session.add(tmp)
             except:
                 print("exception occured")
+        print(productName,"Fringe Sport",productLink[:160],inStock)
         db.session.commit()
         randomWait()
     #Barbells
@@ -637,12 +636,10 @@ def Fringe():
                 inStock="Out of Stock"
             elif "Pre-Order" in soldout.text or "order" in productName.lower():
                 inStock="Backorder"
-                print("backorder")
             else:
                 inStock="In Stock"
         else:
             if "order" in productName.lower():
-                print(productName)
                 inStock="Backorder"
             else:
                 inStock="In Stock"
@@ -656,6 +653,7 @@ def Fringe():
                 db.session.add(tmp)
             except:
                 print("exception occured")
+        print(productName,"Fringe Sport",productLink[:160],inStock)
         db.session.commit()  
         randomWait()
      
@@ -756,9 +754,25 @@ def scrpe2():
 @manager.command
 def alt(): 
     Fringe()
+
+@manager.command
+def updateXMark(): 
+    XMark()
+@manager.command
+def updateREP(): 
+    REP()
 @manager.command
 def updateTitan(): 
     Titan()
+@manager.command
+def updateRogue(): 
+    Rogue()
+@manager.command
+def updateVulcan(): 
+    Vulcan()
+@manager.command
+def updateFringe(): 
+    Fringe()
 
 if __name__ == '__main__':
     manager.run()
