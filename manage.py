@@ -19,6 +19,7 @@ def randomWait():
 def formatPrice(price):
     price=price.replace("$","")
     price=price.replace("\n","")
+    price=price.replace(" ","")
     return price
       
 def Rogue():
