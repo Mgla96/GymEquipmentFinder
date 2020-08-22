@@ -588,10 +588,12 @@ def Fringe():
                 inStock="Out of Stock"
             elif "Pre-Order" in soldout.text or "order" in productName.lower():
                 inStock="Backorder"
+                print("backorder")
             else:
                 inStock="In Stock"
         else:
             if "order" in productName.lower():
+                print(productName)
                 inStock="Backorder"
             else:
                 inStock="In Stock"
@@ -635,10 +637,12 @@ def Fringe():
                 inStock="Out of Stock"
             elif "Pre-Order" in soldout.text or "order" in productName.lower():
                 inStock="Backorder"
+                print("backorder")
             else:
                 inStock="In Stock"
         else:
             if "order" in productName.lower():
+                print(productName)
                 inStock="Backorder"
             else:
                 inStock="In Stock"
@@ -752,6 +756,9 @@ def scrpe2():
 @manager.command
 def alt(): 
     Fringe()
+@manager.command
+def updateTitan(): 
+    Titan()
 
 if __name__ == '__main__':
     manager.run()
