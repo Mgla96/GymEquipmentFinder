@@ -80,7 +80,7 @@
         <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
         data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
         </div>
-        <div class="content row" id="collapse1">
+        <div class="content row collapse" id="collapse1">
             {%for bar in bars | sort(attribute='stock', reverse = True)%}
             {% if bar.stock != "Out of Stock" and bar.stock!="Out of stock"%}
             <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
@@ -142,7 +142,7 @@
         <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
         data-target="#collapse2" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
         </div>
-        <div class="content row" id="collapse2">
+        <div class="content row collapse" id="collapse2">
             {%for plate in plates | sort(attribute='stock', reverse = True)%}
             {% if plate.stock != "Out of Stock" and plate.stock != "Out of stock"%}
             <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
@@ -179,7 +179,7 @@
             <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
             data-target="#collapse3" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
             </div>
-            <div class="content row" id="collapse3">
+            <div class="content row collapse" id="collapse3">
                 {%for dumbbell in dumbbells | sort(attribute='stock', reverse = True)%}
                 {% if dumbbell.stock != "Out of Stock" and dumbbell.stock!="Out of stock"%}
                 <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
@@ -226,7 +226,7 @@
             <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
              data-target="#collapse4" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
             </div>
-            <div class="content row" id="collapse4">
+            <div class="content row collapse" id="collapse4">
                 {%for kettlebell in kettlebells | sort(attribute='stock', reverse = True)%}
                 {% if kettlebell.stock.lower() != "out of stock"%}
                 <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
@@ -262,10 +262,7 @@
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-
         </div>
-
-
 
         <div class="container-fluid pb-2 mb-3">
             <h4 class="" id="powerrack">Power Rack</h4>
@@ -273,7 +270,7 @@
             <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
             data-target="#collapse5" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
             </div>
-            <div class="content row" id="collapse5">
+            <div class="content row collapse" id="collapse5">
                 {%for rack in racks | sort(attribute='stock', reverse = True)%}
                 {% if "out of stock" not in rack.stock.lower() %}
                 <div class="col-auto mb-3 d-flex align-items-stretch mx-auto">
@@ -303,8 +300,6 @@
             <script async
                 src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=02cf9f22-79be-49bf-8f0c-f90aaf7de301"></script>
         </div>
-
-
 
         <div class="container-fluid pb-2 mb-3">
             <h4 id="other">Other Deals</h4>

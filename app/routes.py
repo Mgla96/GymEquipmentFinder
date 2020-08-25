@@ -14,14 +14,12 @@ def before_request():
         urlparts_list = list(urlparts)
         urlparts_list[1] = 'www.weightsinstock.com'
         return redirect(urlunparse(urlparts_list), code=301)
-    
     if request.url.startswith('http://'):
         url=request.url.replace('http://','https://',1)
         code=301
         return redirect(url,code=code)
-   
-    #pass
 
+    
 @app.route('/')
 @app.route('/index')
 def index():
