@@ -605,7 +605,7 @@ def Fringe():
                 db.session.add(tmp)
             except:
                 print("exception occured")
-        print(productName,"Fringe Sport",productLink[:160],inStock)
+        #print(productName,"Fringe Sport",productLink[:160],inStock)
         db.session.commit()
         randomWait()
     #Barbells
@@ -645,17 +645,15 @@ def Fringe():
                 inStock="In Stock"
         tmp2 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp2:
-            if "pre-order" in tmp2.name.lower():
-                print(tmp2.name,inStock)
             tmp2.stock=inStock
             tmp2.price=productPrice
+            db.session.add(tmp2)
         else:
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
             try:
                 db.session.add(tmp)
             except:
                 print("exception occured")
-        print(productName,"Fringe Sport",productLink[:160],inStock)
         db.session.commit()  
         randomWait()
      
@@ -775,8 +773,6 @@ def Alt():
                 inStock="In Stock"
         tmp2 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp2:
-            if "pre-order" in tmp2.name.lower():
-                print(tmp2.name,inStock)
             tmp2.stock=inStock
             tmp2.price=productPrice
         else:
@@ -803,7 +799,7 @@ def scrpe2():
     Fringe()
 @manager.command
 def alt(): 
-    Fringe()
+    Alt()
 
 @manager.command
 def updateXMark(): 
