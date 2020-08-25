@@ -645,6 +645,8 @@ def Fringe():
                 inStock="In Stock"
         tmp2 = db.session.query(Bars).filter_by(name=productName).first()
         if tmp2:
+            if "pre-order" in tmp2.name.lower():
+                print(tmp2.name,inStock)
             tmp2.stock=inStock
             tmp2.price=productPrice
         else:
@@ -736,7 +738,55 @@ def Vulcan():
         randomWait()
 
 def Alt():
-    Fringe()        
+    #Barbells
+    response = get('https://www.fringesport.com/collections/barbells/?size=90')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    bar = html_soup.find_all("div",class_="odd")
+    bar2 = html_soup.find_all("div",class_="even")
+    bars=bar+bar2
+    for bar in bars:
+        productLink = "https://www.fringesport.com"+bar.find("a").get("href")
+        ownPage = get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        omega = html_soup2.find("div",class_="eight columns omega")
+        productName=omega.find("h1",class_="product_name")
+        if productName:
+            productName=productName.text
+        else:
+            productName=""
+        productPrice=omega.find("span",class_="current_price")
+        if productPrice:
+            productPrice=productPrice.text 
+            productPrice=formatPrice(productPrice)
+        else:
+            productPrice="None"
+        soldout=omega.find("span",class_="sold_out")
+        if soldout:
+            if "Sold Out" in soldout.text:
+                inStock="Out of Stock"
+            elif "pre-order" in soldout.text.lower() or "order" in productName.lower():
+                inStock="Backorder"
+            else:
+                inStock="In Stock"
+        else:
+            if "order" in productName.lower():
+                inStock="Backorder"
+            else:
+                inStock="In Stock"
+        tmp2 = db.session.query(Bars).filter_by(name=productName).first()
+        if tmp2:
+            if "pre-order" in tmp2.name.lower():
+                print(tmp2.name,inStock)
+            tmp2.stock=inStock
+            tmp2.price=productPrice
+        else:
+            tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            try:
+                db.session.add(tmp)
+            except:
+                print("exception occured")
+        db.session.commit()  
+        randomWait()      
 
 @manager.command
 def hello():
