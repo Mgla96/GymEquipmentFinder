@@ -179,8 +179,8 @@
 
         <div class="container-fluid pb-2 mb-3">
             <h4 class="" id="dumbbell">Dumbbells</h4>
+              <!--
             <div class="mt-2 mb-2">
-                <!--
             <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
             data-target="#collapse3" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
             </div>
@@ -233,7 +233,7 @@
             <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
              data-target="#collapse4" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
             </div>
-         -->
+            -->
             <div class="content row" id="collapse4">
                 {%for kettlebell in kettlebells | sort(attribute='stock', reverse = True)%}
                 {% if kettlebell.stock.lower() != "out of stock"%}
