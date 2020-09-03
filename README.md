@@ -66,7 +66,7 @@ python manage.py scrpe
 python manage.py scrpe2
 ```
 
-# Viewing Scheduler Logs?
+# Viewing Scheduler Logs
 ```bash
 heroku logs --ps scheduler -a findweights
 ```
