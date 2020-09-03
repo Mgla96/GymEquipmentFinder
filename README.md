@@ -18,7 +18,7 @@ or if python3 linked to pip
 pip install -r requirements.txt
 ```
 
-# Saving dependencies in requirements.txt ?
+# Saving dependencies in requirements.txt
 ```bash
 pip3 freeze > requirements.txt
 ```
