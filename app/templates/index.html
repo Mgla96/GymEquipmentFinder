@@ -66,21 +66,16 @@
             </div>
         </div>
         <h4 class="">What This Tracks</h4>
-        <p>So far, this site tracks deals from Rogue, Fringe Sports, REP, Vulcan, Titan Fitness, and XMark. When an item
+        <p>This site tracks deals from Rogue, Fringe Sports, REP, Vulcan, Titan Fitness, and XMark. When an item
             goes in stock
-            on these websites, it will automatically be updated here. More companies will be added soon! Webpage is updated 3 times daily(8:30-9 am, 3-3:30 pm, and 9-9:30pm Pacific Time) as to not burden these companies with too many requests to their website. If a section is
+            on these websites, it will automatically be updated here. Webpage is updated 3 times daily(8:30-9 am, 3-3:30 pm, and 9-9:30pm Pacific Time) as to not burden these companies with too many requests to their website. If a section is
             blank that means everything is sold out. I hope you find this page useful!
         </p>
         <div id="amzn-assoc-ad-fdfbafb9-b707-4aa3-b767-4088323c6306"></div>
         <script async
             src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=fdfbafb9-b707-4aa3-b767-4088323c6306"></script>
         <h4 id="barbell" class="">Barbells</h4>
-        <!--
-        <div class="mt-2 mb-2">
-        <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
-        data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
-        </div>
-        -->
+    
         <div class="content row" id="collapse1">
             {%for bar in bars | sort(attribute='stock', reverse = True)%}
             {% if bar.stock != "Out of Stock" and bar.stock!="Out of stock"%}
@@ -139,12 +134,7 @@
         <script async
             src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=97119ad9-0607-4835-b103-d0e41429b10e"></script>
         <h4 class="" id="plate">Plates</h4>
-        <!--
-        <div class="mt-2 mb-2">
-        <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
-        data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">See Deals</button>
-        </div>
-        -->
+  
         <div class="content row" id="collapse2">
             {%for plate in plates | sort(attribute='stock', reverse = True)%}
             {% if plate.stock != "Out of Stock" and plate.stock != "Out of stock"%}
@@ -178,12 +168,6 @@
 
         <div class="container-fluid pb-2 mb-3">
             <h4 class="" id="dumbbell">Dumbbells</h4>
-              <!--
-            <div class="mt-2 mb-2">
-            <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
-            data-target="#collapse3" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
-            </div>
-            -->
             <div class="content row" id="collapse3">
                 {%for dumbbell in dumbbells | sort(attribute='stock', reverse = True)%}
                 {% if dumbbell.stock != "Out of Stock" and dumbbell.stock!="Out of stock"%}
@@ -225,12 +209,6 @@
 
         <div class="container-fluid pb-2 mb-3">
             <h4 class="" id="kettlebell">Kettlebells</h4>
-            <!--
-            <div class="mt-2 mb-2">
-            <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
-             data-target="#collapse4" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
-            </div>
-            -->
             <div class="content row" id="collapse4">
                 {%for kettlebell in kettlebells | sort(attribute='stock', reverse = True)%}
                 {% if kettlebell.stock.lower() != "out of stock"%}
@@ -262,12 +240,6 @@
 
         <div class="container-fluid pb-2 mb-3">
             <h4 class="" id="powerrack">Power Rack</h4>
-            <!--
-            <div class="mt-2 mb-2">
-            <button class="btn btn-outline-dark" type="button" data-toggle="collapse"
-            data-target="#collapse5" aria-expanded="false" aria-controls="collapseExample">See Deals</button>
-            </div>
-            -->
             <div class="content row" id="collapse5">
                 {%for rack in racks | sort(attribute='stock', reverse = True)%}
                 {% if "out of stock" not in rack.stock.lower() %}
@@ -298,10 +270,10 @@
             <script async
                 src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=02cf9f22-79be-49bf-8f0c-f90aaf7de301"></script>
         </div>
-
+        <!--
         <div class="container-fluid pb-2 mb-3">
             <h4 id="other">Other Deals</h4>
-            <p>I think T-Bar Rows are one of the best back exercises. I attached this platform to my power rack and for
+            <p>I think T-Bar Rows are one of the greatest back exercises. I attached this platform to my power rack and for
                 a little over $40 total I think this is a pretty good deal. Note: The all
                 black T-Bar row platform was sold out but I was able to purchase the same one in orange.</p>
             <ul>
@@ -323,7 +295,7 @@
                 </li>
             </ul>
         </div>
-
+        -->
         <div class="container-fluid pb-2 mb-3">
             <h4>Weight Storage Rack</h4>
             Personally I just followed the tutorial below and built my own weight rack that only required 2 - 2x4x8 wood
@@ -346,9 +318,7 @@
         <div class="row">
             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                 <h5>Current Status</h5>
-                <p>So far, this site tracks deals from Rogue, Fringe Sports, REP, Vulcan, Titan Fitness, and XMark. More
-                    will be added
-                    soon!</p>
+                <p>This site tracks deals from Rogue, Fringe Sports, REP, Vulcan, Titan Fitness, and XMark.</p>
                 <p>
                     weightsinstock.com is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to amazon products.
                 </p>
