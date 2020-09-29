@@ -1,5 +1,5 @@
 ### Gym Equipment Finder
-Due to COVID-19, available fitness equipment was very scarce and time-consuming to find. This application was created to solve that problem and display all in-stock fitness equipment from numerous popular fitness brands on one page to save people time in their search.
+Due to COVID-19, available fitness equipment was very scarce and time-consuming to find. This application was created to solve that problem and display all in-stock items from numerous popular fitness brands on one page to save people time in their search.
 
 # Creating Venv
 
