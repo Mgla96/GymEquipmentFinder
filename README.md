@@ -1,5 +1,5 @@
 ### Gym Equipment Finder
-Tool to show weights and gym equipment that are in stock from popular brands
+Due to COVID-19, available fitness equipment was very scarce and time-consuming to find. This application was created to solve that problem and display all in-stock fitness equipment from numerous popular fitness brands on one page to save people time in their search.
 
 # Creating Venv
 
@@ -7,7 +7,6 @@ Tool to show weights and gym equipment that are in stock from popular brands
 ```bash
 source venv/bin/activate
 ```
-ex: if you get error no module psycopg2 it's because I forgot to do this
 
 # Installing dependencies in Venv
 ```bash
@@ -47,15 +46,11 @@ SELECT * from "Plates";
 ```
 
 # Testing Scheduler 
-Split into two scripts since the scraping takes long
 ```bash
 heroku run python3 manage.py scrpe -a findweights
 ```
 ```bash
 heroku run python3 manage.py scrpe2 -a findweights
-```
-```bash
-heroku run python3 manage.py alt -a findweights
 ```
 
 # Commands to Directly use in Scheduler
