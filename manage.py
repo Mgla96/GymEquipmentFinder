@@ -281,6 +281,8 @@ def REP():
     for bar in bars:
         prodInfo = bar.find('h2', class_='product-name')
         pricecont = bar.find('div', class_='price-container')
+        if not prodInfo:
+            continue
         productName = prodInfo.text[:100]
         productLink = prodInfo.find('a').get('href')
         productPrice = pricecont.find('span',class_='price').text
