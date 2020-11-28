@@ -58,6 +58,7 @@ def Rogue():
                     db.session.add(tmp4)
                 except:
                     print("exception occured rogue")
+            print("commit")
             db.session.commit()
         if not grouped_items:
             tmp = page_container.find('div',class_='add-to-cart')
@@ -84,7 +85,9 @@ def Rogue():
                     db.session.add(tmp4)
                 except:
                     print("exception occured rogue")
+            print("commit")
             db.session.commit()
+        randomWait()
 
     #Barbell
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
@@ -166,8 +169,7 @@ def Rogue():
         db.session.commit()
         randomWait()
 
-    
-        randomWait()
+
 
 
 def XMark():
