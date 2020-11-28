@@ -41,8 +41,8 @@ heroku pg:psql HEROKU_POSTGRESQL_JADE_URL -a findweights
 
 # Querying Database from terminal
 ```bash
-SELECT * from "Bars";
-SELECT * from "Plates";
+SELECT * FROM "Bars";
+SELECT * FROM "Plates";
 ```
 
 # Testing Scheduler 
