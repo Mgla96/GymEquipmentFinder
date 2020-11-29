@@ -9,7 +9,7 @@ import re
 from requests import get 
 from random import randint
 from bs4 import BeautifulSoup
-
+from datetime import datetime
 manager = Manager(app)
 
 def randomWait():
@@ -21,6 +21,25 @@ def formatPrice(price):
     price=price.replace("\n","")
     price=price.replace(" ","")
     return price
+
+def removeOldProducts():
+    #Barbell
+    bb = db.session.query(Bars).filter(lambda x: (x.date() - datetime.utcnow()) > 2)
+    for x in bb:
+        db.session.delete(x)
+        db.session.commit()
+    
+    #Plates
+    p = db.session.query(Plates).filter(lambda x: (x.date() - datetime.utcnow()) > 2)
+    for x in p:
+        db.session.delete(x)
+        db.session.commit()
+
+    #Dumbbells
+    db = db.session.query(Dumbbells).filter(lambda x: (x.date() - datetime.utcnow()) > 2)
+    for x in db:
+        db.session.delete(x)
+        db.session.commit()
       
 def Rogue():
     #Barbell
@@ -57,7 +76,7 @@ def Rogue():
             tmp3.stock=inStock 
             tmp3.price=productPrice 
         else:
-            tmp4 = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            tmp4 = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
             try:
                 db.session.add(tmp4)
             except:
@@ -95,7 +114,7 @@ def Rogue():
             tmp3.stock=inStock 
             tmp3.price=productPrice
         else:
-            tmp4 = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            tmp4 = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
             try:
                 db.session.add(tmp4)
             except:
@@ -172,7 +191,6 @@ def Rogue():
 
 
 
-
 def XMark():
     #Barbell ..
     response = get('https://www.xmarkfitness.com/bars/?limit=80')
@@ -202,7 +220,7 @@ def XMark():
                 tmp2.stock=inStock
                 tmp2.price=productPrice
             else:
-                tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -237,7 +255,7 @@ def XMark():
                 tmp2.stock=inStock
                 tmp2.price=productPrice
             else:
-                tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -272,7 +290,7 @@ def XMark():
                 tmp2.stock=inStock 
                 tmp2.price=productPrice  
             else:
-                tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -308,7 +326,7 @@ def REP():
                 tmp2.stock=inStock
                 tmp2.price=productPrice
             else:
-                tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=inStock)
+                tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -344,7 +362,7 @@ def REP():
                 tmp2.stock=inStock
                 tmp2.price=productPrice
             else:
-                tmp = Plates(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Plates(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -380,7 +398,7 @@ def REP():
                 tmp2.stock=inStock   
                 tmp2.price=productPrice  
             else:
-                tmp = Dumbbells(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Dumbbells(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -425,7 +443,7 @@ def Titan():
                 tmp2.stock=inStock
                 tmp2.price=productPrice
             else:
-                tmp = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -468,7 +486,7 @@ def Titan():
                 tmp2.stock=inStock 
                 tmp2.price=productPrice
             else:
-                tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
@@ -510,13 +528,14 @@ def Titan():
                 tmp2.stock=inStock 
                 tmp2.price=productPrice
             else:
-                tmp = Dumbbells(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                tmp = Dumbbells(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                 try:
                     db.session.add(tmp)
                 except:
                     print("exception occured")
             db.session.commit()
         randomWait()
+    '''
     #Racks
     response = get('https://www.titan.fitness/racks/power-racks/?size=90')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -570,6 +589,7 @@ def Titan():
                         print("exception occured")
                 db.session.commit()
         randomWait()
+    '''
        
         
 def Fringe():
@@ -613,7 +633,7 @@ def Fringe():
             tmp2.stock=inStock
             tmp2.price=productPrice
         else:
-            tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
             try:
                 db.session.add(tmp)
             except:
@@ -662,7 +682,7 @@ def Fringe():
             tmp2.price=productPrice
             db.session.add(tmp2)
         else:
-            tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
             try:
                 db.session.add(tmp)
             except:
@@ -698,7 +718,7 @@ def Vulcan():
             tmp2.stock=inStock
             tmp2.price=productPrice
         else:
-            tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
             try:
                 db.session.add(tmp)
             except:
@@ -740,13 +760,14 @@ def Vulcan():
                     tmp2.stock=inStock
                     tmp2.price=productPrice
                 else:
-                    tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                    tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
                     try:
                         db.session.add(tmp)
                     except:
                         print("exception occured")
                 db.session.commit()  
         randomWait()
+
 
 def Alt():
     #Barbells
@@ -789,7 +810,7 @@ def Alt():
             tmp2.stock=inStock
             tmp2.price=productPrice
         else:
-            tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+            tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow)
             try:
                 db.session.add(tmp)
             except:
@@ -832,6 +853,9 @@ def updateVulcan():
 @manager.command
 def updateFringe(): 
     Fringe()
+@manager.command
+def removeProducts(): 
+    removeOldProducts()
 
 if __name__ == '__main__':
     manager.run()
