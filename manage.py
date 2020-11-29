@@ -23,72 +23,6 @@ def formatPrice(price):
     return price
       
 def Rogue():
-    #Rogue Kettlebells
-    response = get('https://www.roguefitness.com/conditioning/strength-equipment/kettlebells?gclid=Cj0KCQjwsuP5BRCoARIsAPtX_wFq_3o7IKH_cRBzNgiGG-j2joxuDmEqrMjtmvwilehXiI0nNIgtvyEaArd8EALw_wcB?limit=80')
-    html_soup = BeautifulSoup(response.text, 'html.parser')
-    posts = html_soup.find_all('li',class_='item')
-    for post in posts:
-        search_header = post.find('div', class_='product-details')
-        productName = search_header.find('h2',class_='product-name').text
-        productLink = search_header.find('a').get('href')
-        productPrice = search_header.find('span',class_='price').text
-        ownPage = get(productLink)
-        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
-        page_container = html_soup2.find('div',class_='main-container')
-
-        grouped_items = page_container.find_all('div',class_="grouped-item")
-    
-        for group in grouped_items:
-            item_name=group.find("div",class_="item-name").text
-            if "Monster" in productName:
-                item_name="Monster "+item_name
-            item_price=group.find("span",class_="price").text
-            item_price=formatPrice(item_price)
-            if group.find("div",class_="item-qty input-text"):
-                item_stock="In Stock"
-            else:
-                item_stock="Out of Stock"
-            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
-            if tmp3:
-                tmp3.stock=item_stock 
-                tmp3.price=item_price 
-            else:
-                tmp4 = Kettlebells(name=item_name,brand="Rogue",link=productLink[:160],price=item_price[:12],image="",stock=item_stock)
-                try:
-                    db.session.add(tmp4)
-                except:
-                    print("exception occured rogue")
-            print("commit")
-            db.session.commit()
-        if not grouped_items:
-            tmp = page_container.find('div',class_='add-to-cart')
-            if tmp:
-                tmp2 = tmp.find('button')
-            else:
-                tmp2 = False
-            inStock="Out of Stock"
-            if tmp2:
-                if tmp2.text == "Add to Cart":
-                    inStock="In Stock"
-            if productPrice:
-                test = productPrice.find("$")
-                if test!=-1:
-                    productPrice=productPrice[test+1:]
-            
-            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
-            if tmp3:
-                tmp3.stock=inStock 
-                tmp3.price=productPrice 
-            else:
-                tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
-                try:
-                    db.session.add(tmp4)
-                except:
-                    print("exception occured rogue")
-            print("commit")
-            db.session.commit()
-        randomWait()
-
     #Barbell
     response = get('https://www.roguefitness.com/weightlifting-bars-plates/barbells/mens-20kg-barbells?limit=80')
     html_soup = BeautifulSoup(response.text, 'html.parser')
@@ -168,6 +102,73 @@ def Rogue():
                 print("exception occured rogue plate")
         db.session.commit()
         randomWait()
+    '''
+    #Rogue Kettlebells
+    response = get('https://www.roguefitness.com/conditioning/strength-equipment/kettlebells?gclid=Cj0KCQjwsuP5BRCoARIsAPtX_wFq_3o7IKH_cRBzNgiGG-j2joxuDmEqrMjtmvwilehXiI0nNIgtvyEaArd8EALw_wcB?limit=80')
+    html_soup = BeautifulSoup(response.text, 'html.parser')
+    posts = html_soup.find_all('li',class_='item')
+    for post in posts:
+        search_header = post.find('div', class_='product-details')
+        productName = search_header.find('h2',class_='product-name').text
+        productLink = search_header.find('a').get('href')
+        productPrice = search_header.find('span',class_='price').text
+        ownPage = get(productLink)
+        html_soup2 = BeautifulSoup(ownPage.text, 'html.parser')
+        page_container = html_soup2.find('div',class_='main-container')
+
+        grouped_items = page_container.find_all('div',class_="grouped-item")
+    
+        for group in grouped_items:
+            item_name=group.find("div",class_="item-name").text
+            if "Monster" in productName:
+                item_name="Monster "+item_name
+            item_price=group.find("span",class_="price").text
+            item_price=formatPrice(item_price)
+            if group.find("div",class_="item-qty input-text"):
+                item_stock="In Stock"
+            else:
+                item_stock="Out of Stock"
+            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
+            if tmp3:
+                tmp3.stock=item_stock 
+                tmp3.price=item_price 
+            else:
+                tmp4 = Kettlebells(name=item_name,brand="Rogue",link=productLink[:160],price=item_price[:12],image="",stock=item_stock)
+                try:
+                    db.session.add(tmp4)
+                except:
+                    print("exception occured rogue")
+            print("commit")
+            db.session.commit()
+        if not grouped_items:
+            tmp = page_container.find('div',class_='add-to-cart')
+            if tmp:
+                tmp2 = tmp.find('button')
+            else:
+                tmp2 = False
+            inStock="Out of Stock"
+            if tmp2:
+                if tmp2.text == "Add to Cart":
+                    inStock="In Stock"
+            if productPrice:
+                test = productPrice.find("$")
+                if test!=-1:
+                    productPrice=productPrice[test+1:]
+            
+            tmp3 = db.session.query(Kettlebells).filter_by(name=productName).first()
+            if tmp3:
+                tmp3.stock=inStock 
+                tmp3.price=productPrice 
+            else:
+                tmp4 = Kettlebells(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock)
+                try:
+                    db.session.add(tmp4)
+                except:
+                    print("exception occured rogue")
+            print("commit")
+            db.session.commit()
+        randomWait()
+    '''
 
 
 
