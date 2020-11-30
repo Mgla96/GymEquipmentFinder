@@ -56,6 +56,7 @@ def Rogue():
         if tmp3:
             tmp3.stock=inStock 
             tmp3.price=productPrice 
+            tmp3.date=datetime.utcnow()
         else:
             tmp4 = Bars(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
             try:
@@ -94,6 +95,7 @@ def Rogue():
         if tmp3:
             tmp3.stock=inStock 
             tmp3.price=productPrice
+            tmp3.date=datetime.utcnow()
         else:
             tmp4 = Plates(name=productName,brand="Rogue",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
             try:
@@ -200,6 +202,7 @@ def XMark():
             if tmp2:
                 tmp2.stock=inStock
                 tmp2.price=productPrice
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Bars(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -235,6 +238,7 @@ def XMark():
             if tmp2:
                 tmp2.stock=inStock
                 tmp2.price=productPrice
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Plates(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -270,6 +274,7 @@ def XMark():
             if tmp2:
                 tmp2.stock=inStock 
                 tmp2.price=productPrice  
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Dumbbells(name=productName,brand="XMark",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -306,6 +311,7 @@ def REP():
             if tmp2:
                 tmp2.stock=inStock
                 tmp2.price=productPrice
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Bars(name=productName,brand="REP",link=productLink[:160],price=productPrice[1:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -342,6 +348,7 @@ def REP():
             if tmp2:
                 tmp2.stock=inStock
                 tmp2.price=productPrice
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Plates(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -378,6 +385,7 @@ def REP():
             if tmp2:
                 tmp2.stock=inStock   
                 tmp2.price=productPrice  
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Dumbbells(name=productName,brand="REP",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -423,6 +431,7 @@ def Titan():
             if tmp2:
                 tmp2.stock=inStock
                 tmp2.price=productPrice
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Plates(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -466,6 +475,7 @@ def Titan():
             if tmp2:
                 tmp2.stock=inStock 
                 tmp2.price=productPrice
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Bars(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -508,6 +518,7 @@ def Titan():
             if tmp2:
                 tmp2.stock=inStock 
                 tmp2.price=productPrice
+                tmp2.date=datetime.utcnow()
             else:
                 tmp = Dumbbells(name=productName,brand="Titan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                 try:
@@ -613,6 +624,7 @@ def Fringe():
         if tmp2:
             tmp2.stock=inStock
             tmp2.price=productPrice
+            tmp2.date=datetime.utcnow()
         else:
             tmp = Plates(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
             try:
@@ -661,6 +673,7 @@ def Fringe():
         if tmp2:
             tmp2.stock=inStock
             tmp2.price=productPrice
+            tmp2.date=datetime.utcnow()
             db.session.add(tmp2)
         else:
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
@@ -698,6 +711,7 @@ def Vulcan():
         if tmp2:
             tmp2.stock=inStock
             tmp2.price=productPrice
+            tmp2.date=datetime.utcnow()
         else:
             tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
             try:
@@ -740,6 +754,7 @@ def Vulcan():
                 if tmp2:
                     tmp2.stock=inStock
                     tmp2.price=productPrice
+                    tmp2.date=datetime.utcnow()
                 else:
                     tmp = Plates(name=productName,brand="Vulcan",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
                     try:
@@ -790,6 +805,7 @@ def Alt():
         if tmp2:
             tmp2.stock=inStock
             tmp2.price=productPrice
+            tmp2.date=datetime.utcnow()
         else:
             tmp = Bars(name=productName,brand="Fringe Sport",link=productLink[:160],price=productPrice[:12],image="",stock=inStock,date=datetime.utcnow())
             try:
@@ -804,29 +820,34 @@ def removeOldProducts():
     If product not updated in over 2 days that means product must have been deleted
     so get rid of it from database
     '''
-    #Barbell
-    bb = db.session.query(Bars).all()
-    bb = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),bb)
-    print(bb)
-    for x in bb:
-        db.session.delete(x)
-        db.session.commit()
+    try:
+        barbell = db.session.query(Bars).all()
+        barbell = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),bb)
+        for x in barbell:
+            db.session.delete(x)
+            db.session.commit()
+    except:
+        print("error with bars")
+    
+    try:
+        plate = db.session.query(Plates).all()
+        plate = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),p)
+        print(plate)
+        for x in plate:
+            db.session.delete(x)
+            db.session.commit()
+    except:
+        print("error with plates")
 
-    #Plates
-    p = db.session.query(Plates).all()
-    p = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),p)
-    print(p)
-    for x in p:
-        db.session.delete(x)
-        db.session.commit()
-
-    #Dumbbells
-    db = db.session.query(Dumbbells).all()
-    db = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),db)
-    print(db)
-    for x in db:
-        db.session.delete(x)
-        db.session.commit()
+    try:
+        dumbbell = db.session.query(Dumbbells).all()
+        dumbbell = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),db)
+        print(dumbbell)
+        for x in dumbbell:
+            db.session.delete(x)
+            db.session.commit()
+    except:
+        print("error with dumbbells")
 
 @manager.command
 def hello():
