@@ -813,14 +813,16 @@ def removeOldProducts():
         db.session.commit()
 
     #Plates
-    p = db.session.query(Plates).filter_by(Plates.date - datetime.utcnow() > timedelta(days = 2)).all()
+    p = db.session.query(Plates).all()
+    p = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),p)
     print(p)
     for x in p:
         db.session.delete(x)
         db.session.commit()
 
     #Dumbbells
-    db = db.session.query(Dumbbells).filter_by(Dumbbells.date - datetime.utcnow() > timedelta(days = 2)).all()
+    db = db.session.query(Dumbbells).all()
+    db = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),db)
     print(db)
     for x in db:
         db.session.delete(x)
