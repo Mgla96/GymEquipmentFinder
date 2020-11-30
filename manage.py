@@ -822,7 +822,7 @@ def removeOldProducts():
     '''
     try:
         barbell = db.session.query(Bars).all()
-        barbell = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),bb)
+        barbell = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),barbell)
         for x in barbell:
             db.session.delete(x)
             db.session.commit()
@@ -831,7 +831,7 @@ def removeOldProducts():
     
     try:
         plate = db.session.query(Plates).all()
-        plate = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),p)
+        plate = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),plate)
         print(plate)
         for x in plate:
             db.session.delete(x)
@@ -841,7 +841,7 @@ def removeOldProducts():
 
     try:
         dumbbell = db.session.query(Dumbbells).all()
-        dumbbell = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),db)
+        dumbbell = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),dumbbell)
         print(dumbbell)
         for x in dumbbell:
             db.session.delete(x)
