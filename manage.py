@@ -804,32 +804,27 @@ def removeOldProducts():
     If product not updated in over 2 days that means product must have been deleted
     so get rid of it from database
     '''
-
+    #Barbell
     bb = db.session.query(Bars).all()
     bb = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),bb)
-    for x in bb:
-        db.session.delete(x)
-        db.session.commit()
-
-    '''
-    #Barbell
-    bb = db.session.query(Bars).filter_by(Bars.date - datetime.utcnow() > 2).all()
+    print(bb)
     for x in bb:
         db.session.delete(x)
         db.session.commit()
 
     #Plates
-    p = db.session.query(Plates).filter_by(Plates.date - datetime.utcnow() > 2).all()
+    p = db.session.query(Plates).filter_by(Plates.date - datetime.utcnow() > timedelta(days = 2)).all()
+    print(p)
     for x in p:
         db.session.delete(x)
         db.session.commit()
 
     #Dumbbells
-    db = db.session.query(Dumbbells).filter_by(Dumbbells.date - datetime.utcnow() > 2).all()
+    db = db.session.query(Dumbbells).filter_by(Dumbbells.date - datetime.utcnow() > timedelta(days = 2)).all()
+    print(db)
     for x in db:
         db.session.delete(x)
         db.session.commit()
-    '''
 
 @manager.command
 def hello():
