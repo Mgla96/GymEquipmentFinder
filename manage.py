@@ -806,11 +806,11 @@ def removeOldProducts():
     '''
 
     bb = db.session.query(Bars).all()
-    bb = filter(lambda x:x.date-datetime.utcnow()>2,bb)
+    bb = filter(lambda x:x.date-datetime.utcnow()>timedelta(days = 2),bb)
     for x in bb:
         db.session.delete(x)
         db.session.commit()
-        
+
     '''
     #Barbell
     bb = db.session.query(Bars).filter_by(Bars.date - datetime.utcnow() > 2).all()
