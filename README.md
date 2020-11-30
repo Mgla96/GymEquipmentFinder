@@ -1,14 +1,17 @@
-### Gym Equipment Finder
+# Gym Equipment Finder
 Due to COVID-19, available fitness equipment was very scarce and time-consuming to find. This application was created to solve that problem and display all in-stock items from numerous popular fitness brands on one page to save people time in their search.
 
-# Creating Venv
+### Demo Videos
+See demo.mp4 for a demonstration of what this web application looked like when it was running.
 
-# Activate Existing Venv
+### Creating Venv
+
+### Activate Existing Venv
 ```bash
 source venv/bin/activate
 ```
 
-# Installing dependencies in Venv
+### Installing dependencies in Venv
 ```bash
 pip3 install -r requirements.txt
 ```
@@ -17,35 +20,35 @@ or if python3 linked to pip
 pip install -r requirements.txt
 ```
 
-# Saving dependencies in requirements.txt
+### Saving dependencies in requirements.txt
 ```bash
 pip3 freeze > requirements.txt
 ```
 
-# Seeing Custom Domains
+### Seeing Custom Domains
 ```bash
 heroku domains -a findweights
 ```
 
-# Running
+### Running
 ```bash
 python3 -m flask run
 ```
 
-# Establish psql session with your remote database
+### Establish psql session with your remote database
 ```bash
 heroku pg:psql -a findweights
 or
 heroku pg:psql HEROKU_POSTGRESQL_JADE_URL -a findweights
 ```
 
-# Querying Database from terminal
+### Querying Database from terminal
 ```bash
 SELECT * FROM "Bars";
 SELECT * FROM "Plates";
 ```
 
-# Testing Scheduler 
+### Testing Scheduler 
 ```bash
 heroku run python3 manage.py scrpe -a findweights
 ```
@@ -53,7 +56,7 @@ heroku run python3 manage.py scrpe -a findweights
 heroku run python3 manage.py scrpe2 -a findweights
 ```
 
-# Commands to Directly use in Scheduler
+### Commands to Directly use in Scheduler
 ```bash
 python manage.py scrpe
 ```
@@ -61,7 +64,7 @@ python manage.py scrpe
 python manage.py scrpe2
 ```
 
-# Viewing Scheduler Logs
+### Viewing Scheduler Logs
 ```bash
 heroku logs --ps scheduler -a findweights
 ```
