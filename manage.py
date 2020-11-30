@@ -23,20 +23,24 @@ def formatPrice(price):
     return price
 
 def removeOldProducts():
+    '''
+    If product not updated in over 2 days that means product must have been deleted
+    so get rid of it from database
+    '''
     #Barbell
-    bb = db.session.query(Bars).filter(lambda x: (x.date() - datetime.utcnow()) > 2)
+    bb = db.session.query(Bars).filter(Bars.date - datetime.utcnow() > 2)
     for x in bb:
         db.session.delete(x)
         db.session.commit()
     
     #Plates
-    p = db.session.query(Plates).filter(lambda x: (x.date() - datetime.utcnow()) > 2)
+    p = db.session.query(Plates).filter(Plates.date - datetime.utcnow() > 2)
     for x in p:
         db.session.delete(x)
         db.session.commit()
 
     #Dumbbells
-    db = db.session.query(Dumbbells).filter(lambda x: (x.date() - datetime.utcnow()) > 2)
+    db = db.session.query(Dumbbells).filter(Dumbbells.date - datetime.utcnow() > 2)
     for x in db:
         db.session.delete(x)
         db.session.commit()
