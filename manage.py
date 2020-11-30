@@ -826,8 +826,8 @@ def removeOldProducts():
         for x in barbell:
             db.session.delete(x)
             db.session.commit()
-    except:
-        print("error with bars")
+    except Exception as e:
+        print("error with bars",e)
     
     try:
         plate = db.session.query(Plates).all()
@@ -836,8 +836,8 @@ def removeOldProducts():
         for x in plate:
             db.session.delete(x)
             db.session.commit()
-    except:
-        print("error with plates")
+    except Exception as e:
+        print("error with plates",e)
 
     try:
         dumbbell = db.session.query(Dumbbells).all()
@@ -846,8 +846,8 @@ def removeOldProducts():
         for x in dumbbell:
             db.session.delete(x)
             db.session.commit()
-    except:
-        print("error with dumbbells")
+    except Exception as e:
+        print("error with dumbbells",e)
 
 @manager.command
 def hello():
