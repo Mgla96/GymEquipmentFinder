@@ -804,6 +804,14 @@ def removeOldProducts():
     If product not updated in over 2 days that means product must have been deleted
     so get rid of it from database
     '''
+
+    bb = db.session.query(Bars).all()
+    bb = filter(lambda x:x.date-datetime.utcnow()>2,bb)
+    for x in bb:
+        db.session.delete(x)
+        db.session.commit()
+        
+    '''
     #Barbell
     bb = db.session.query(Bars).filter_by(Bars.date - datetime.utcnow() > 2).all()
     for x in bb:
@@ -821,6 +829,7 @@ def removeOldProducts():
     for x in db:
         db.session.delete(x)
         db.session.commit()
+    '''
 
 @manager.command
 def hello():
